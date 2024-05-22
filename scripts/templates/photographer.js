@@ -1,23 +1,45 @@
 function photographerTemplate(data) {
-    const { name, portrait } = data;
+    //destructuring : ajout des autres infos necessaires pour la carte photographe
+    const { name, portrait, city, country, tagline, price } = data;
 
     const picture = `assets/photographers/${portrait}`;
-    const link = `link to ${name} photographer profile`
+    //texte qui sera display dans l'attribut alt de la balise a
+    const link = `link to ${name} photographer profile`;
+
 
     function getUserCardDOM() {
         const article = document.createElement('article');
-        const img = document.createElement('img');
+
         //ajout de l'élément clickable vers le profile du photographe
         const profileLink = document.createElement('a');
         //définition du texte alternatif pour le lien
-        profileLink.setAttribute("alt", link);
-        img.setAttribute("src", picture)
+        profileLink.setAttribute("aria-label", link);
+        //lien vide pour le moment
+        profileLink.setAttribute("href", "#");
+        const img = document.createElement('img');
+        img.setAttribute("src", picture);
         const h2 = document.createElement('h2');
         h2.textContent = name;
-        profileLink.appendChild(article);
-        article.appendChild(img);
-        article.appendChild(h2);
-        return (profileLink);
+
+        //enfants de la balise a
+        profileLink.appendChild(img);
+        profileLink.appendChild(h2);
+
+        //ville, tagline, price
+        const h3 = document.createElement('h3');
+        h3.textContent = `${city}, ${country}`;
+        const p = document.createElement('p');
+        p.textContent = tagline;
+        const span = document.createElement('span');
+        span.textContent = `${price}€/jour`;
+
+        //enfants de article a (img et h2) + h3, p, span
+        article.appendChild(profileLink);
+        article.appendChild(h3);
+        article.appendChild(p);
+        article.appendChild(span);
+
+        return (article);
     }
     return { name, picture, getUserCardDOM }
 }
