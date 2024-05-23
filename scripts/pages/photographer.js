@@ -112,17 +112,17 @@ function displayPhotographerMedia(photographer) {
     const section = document.querySelector('.photograph-gallery');
 
 
-    //on insère cette div dans le header avant le boutton de contact
-    header.insertBefore(identityInfo, header.querySelector('.contact_button'));
+    // //on insère cette div dans le header avant le boutton de contact
+    // header.insertBefore(identityInfo, header.querySelector('.contact_button'));
 
 
-    //on display la photo de profile avec la src et le alt text pour le nom du photograph
-    const picture = document.createElement('img');
-    picture.setAttribute("src", `assets/photographers/${photographer.portrait}`);
-    picture.setAttribute('alt', photographer.name);
+    // //on display la photo de profile avec la src et le alt text pour le nom du photograph
+    // const picture = document.createElement('img');
+    // picture.setAttribute("src", `assets/photographers/${photographer.portrait}`);
+    // picture.setAttribute('alt', photographer.name);
 
-    // header.appendChild(identityInfo);
-    header.appendChild(picture);
+    // // header.appendChild(identityInfo);
+    // header.appendChild(picture);
 }
 
 
