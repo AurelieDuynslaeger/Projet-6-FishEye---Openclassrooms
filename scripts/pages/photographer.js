@@ -84,3 +84,45 @@ function displayPhotographerData(photographer) {
     header.appendChild(picture);
 }
 
+async function getMedias() {
+    try {
+        // fetch vers le fichier json
+        const fetchMedias = await fetch("data/photographers.json");
+        //si autre réponse que 200 alors afficher l'erreur
+        if (!fetchMedias.ok) {
+            throw new Error('Erreur récup data')
+        }
+        //sinon on stocke le fetch dans data et objet js
+        const dataMedias = await fetchMedias.json();
+        const medias = dataMedias.media;
+        return
+        //on aon retourne uniquement medias
+        { medias };
+
+    } catch (error) {
+        console.error("Erreur: ".error);
+        return {
+            medias: []
+        };
+    }
+}
+
+function displayPhotographerMedia(photographer) {
+    //on cible la section de photographer.html
+    const section = document.querySelector('.photograph-gallery');
+
+
+    //on insère cette div dans le header avant le boutton de contact
+    header.insertBefore(identityInfo, header.querySelector('.contact_button'));
+
+
+    //on display la photo de profile avec la src et le alt text pour le nom du photograph
+    const picture = document.createElement('img');
+    picture.setAttribute("src", `assets/photographers/${photographer.portrait}`);
+    picture.setAttribute('alt', photographer.name);
+
+    // header.appendChild(identityInfo);
+    header.appendChild(picture);
+}
+
+
