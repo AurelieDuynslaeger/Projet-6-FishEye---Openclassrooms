@@ -31,8 +31,8 @@ h1 {
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
+    gap: 40px;
+    margin-top: 50px;
 }
 
 .photographer_section article {
@@ -45,17 +45,18 @@ h1 {
 
 .photographer_section article a h2 {
     color: #D3573C;
-    font-size: 36px;
-    margin-bottom: 12px;
+    font-size: 28px;
+    margin-bottom: 8px;
+    font-weight: 200;
 }
 .photographer_section article h3 {
     color: #D3573C;
-    font-size: 16px;
-    margin-bottom: 12px;
+    font-size: 12px;
+    margin-bottom: 8px;
 }
 .photographer_section article p, 
 .photographer_section article span{
-    font-size: 12px;
+    font-size: 10px;
     margin-bottom: 8px;
 }
 
