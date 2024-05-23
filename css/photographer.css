@@ -91,7 +91,10 @@
 .item-rating{
     display: flex;
     align-items: center;
+}
 
+.item-rating img {
+    cursor: pointer;
 }
 
 .contact_button {

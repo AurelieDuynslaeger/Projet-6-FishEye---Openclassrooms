@@ -174,7 +174,18 @@ function displayPhotographerMedia(medias) {
         //compte des likes
         const likesCount = document.createElement('span');
         likesCount.textContent = media.likes;
+        likesCount.classList.add('likes-count');
         itemLikes.appendChild(itemTitle);
+
+        //écouteur d'évenement sur l'icone pr le compteur de likes qui s'incrémente : 
+        likeIcon.addEventListener('click', () => {
+            //on récup d'abord le nombre de likes actuel
+            const likesCount = itemGallery.querySelector(".likes-count");
+            let actualLikes = parseInt(likesCount.textContent);//valeur de likesCount
+            actualLikes++; //mise à jour au clik du compteur
+
+            likesCount.textContent = actualLikes; //affichage mis à jour
+        })
 
         //gallery item a pour enfant titre et likes
         spanrate.appendChild(likesCount);
