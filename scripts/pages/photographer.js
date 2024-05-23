@@ -57,6 +57,23 @@ function displayPhotographerData(photographer) {
     //on cible les sections de photographer.html
     const header = document.querySelector('.photograph-header');
 
+    // const rating = document.querySelector('.photograph-rating');
+
+    // const totalLikes = document.createElement('div');
+    // totalLikes.classList.add('photographer-likes-and-price');
+
+    // const ratingLikes = document.createElement("p");
+    // ratingLikes.textContent = 297081;
+
+    // const likeIcon = document.createElement('img');
+    // //icon Coeur pour les likes totaux
+    // likeIcon.src = 'assets/icons/heart.svg';
+    // likeIcon.alt = 'Likes';
+
+    // const price = document.createElement('p');
+    // price.textContent = `${photographer.price}€/jour`;
+
+
     //h1 qui display le nom
     const h1 = document.createElement('h1');
     h1.textContent = photographer.name;
@@ -75,6 +92,13 @@ function displayPhotographerData(photographer) {
     identityInfo.appendChild(h1);
     identityInfo.appendChild(location);
     identityInfo.appendChild(tagline);
+
+
+    // totalLikes.appendChild(ratingLikes);
+    // totalLikes.appendChild(likeIcon);
+
+    // rating.appendChild(totalLikes);
+    // rating.appendChild(price);
 
     //on insère cette div dans le header avant le boutton de contact
     header.insertBefore(identityInfo, header.querySelector('.contact_button'));
@@ -140,6 +164,8 @@ function displayPhotographerMedia(medias) {
 
         const itemLikes = document.createElement('div');
         itemLikes.classList.add('likes');
+        const spanrate = document.createElement('div');
+        spanrate.classList.add('item-rating');
 
         const likeIcon = document.createElement('img');
         //icon Coeur pour les likes
@@ -148,11 +174,13 @@ function displayPhotographerMedia(medias) {
         //compte des likes
         const likesCount = document.createElement('span');
         likesCount.textContent = media.likes;
-        itemLikes.appendChild(likeIcon);
-        itemLikes.appendChild(likesCount);
+        itemLikes.appendChild(itemTitle);
 
         //gallery item a pour enfant titre et likes
-        itemGallery.appendChild(itemTitle);
+        spanrate.appendChild(likesCount);
+        spanrate.appendChild(likeIcon);
+
+        itemLikes.appendChild(spanrate);
         itemGallery.appendChild(itemLikes);
         //gallery a pour enfant item entier
         section.appendChild(itemGallery);
