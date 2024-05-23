@@ -1,7 +1,4 @@
-//Mettre le code JavaScript lié à la page photographer.html
-
 //récuperer l'id véhiculé dans l'url
-
 document.addEventListener("DOMContentLoaded", async () => {
     //on vient regarder dans l'url le param id
     const paramUrl = new URLSearchParams(window.location.search);
@@ -9,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const idPhotograh = paramUrl.get('id');
     console.log(idPhotograh);
 
-    //si unid est trouvé
+    //si un id est trouvé
     if (idPhotograh) {
         //on lance le fetch photographers
         const photographers = await getPhotographers();
@@ -31,6 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+//récupération de tous les photographes
 async function getPhotographers() {
     try {
         // fetch vers le fichier json
@@ -53,6 +51,7 @@ async function getPhotographers() {
     }
 }
 
+//affichage des données des photographe home page
 function displayPhotographerData(photographer) {
     //on cible les sections de photographer.html
     const header = document.querySelector('.photograph-header');
@@ -113,6 +112,7 @@ function displayPhotographerData(photographer) {
     header.appendChild(picture);
 }
 
+//récupération de tous les médias
 async function getMedias() {
     try {
         // fetch vers le fichier json
@@ -135,6 +135,7 @@ async function getMedias() {
     }
 }
 
+//affichage des média d'un photographe par l'id
 function displayPhotographerMedia(medias) {
     //on cible la section de photographer.html
     const section = document.querySelector('.photograph-gallery');
