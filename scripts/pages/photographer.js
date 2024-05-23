@@ -79,7 +79,7 @@ function displayPhotographerData(photographer) {
     h1.textContent = photographer.name;
 
     //h3 qui display la ville
-    const location = document.createElement('h3');
+    const location = document.createElement('h2');
     location.textContent = `${photographer.city}, ${photographer.country}`;
 
     //p qui display la tagline
