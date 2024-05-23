@@ -95,9 +95,9 @@ async function getMedias() {
         //sinon on stocke le fetch dans data et objet js
         const dataMedias = await fetchMedias.json();
         const medias = dataMedias.media;
-        return
-        //on aon retourne uniquement medias
-        { medias };
+        return { medias };
+        // retourne uniquement medias
+
 
     } catch (error) {
         console.error("Erreur: ".error);
@@ -111,18 +111,49 @@ function displayPhotographerMedia(photographer) {
     //on cible la section de photographer.html
     const section = document.querySelector('.photograph-gallery');
 
+    //pour chaque média du photographe, on crée une div avec la class "gallery-item";
+    photographer.media.forEach(media => {
+        const itemGallery = document.createElement('div');
+        itemGallery.classList.add('gallery-item');
 
-    // //on insère cette div dans le header avant le boutton de contact
-    // header.insertBefore(identityInfo, header.querySelector('.contact_button'));
+        if (media.image) {
+            //si le média est une photo
+            const img = document.createElement('img');
+            img.src = `assets/media/${media.image}`;
+            img.alt = media.title;
+            itemGallery.appendChild(img);
+        } else if (media.video) {
+            //si le média est une photo
+            const video = document.createElement('video');
+            video.src = `assets/media/${media.video}`;
+            video.controls = true;
+            galleryItem.appendChild(video);
+        }
 
+        //titre de l'item
+        const itemTitle = document.createElement('h4');
+        title.textContent = media.title;
 
-    // //on display la photo de profile avec la src et le alt text pour le nom du photograph
-    // const picture = document.createElement('img');
-    // picture.setAttribute("src", `assets/photographers/${photographer.portrait}`);
-    // picture.setAttribute('alt', photographer.name);
+        const itemLikes = document.createElement('div');
+        itemLikes.classList.add('likes');
 
-    // // header.appendChild(identityInfo);
-    // header.appendChild(picture);
+        const likeIcon = documen.createElement('img');
+        //icon Coeur pour les likes
+        likeIcon.src = 'assets/icons/heart.svg';
+        likeIcon.alt = 'Likes';
+        //compte des likes
+        const likesCount = document.createElement('span');
+        likesCount.textContent = media.likes;
+        likes.appendChild(likeIcon);
+        likes.appendChild(likesCount);
+
+        //gallery item a pour enfant titre et likes
+        galleryItem.appendChild(title);
+        galleryItem.appendChild(likes);
+        //gallery a pour enfant item entier
+        section.appendChild(galleryItem);
+
+    });
 }
 
 

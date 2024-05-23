@@ -34,6 +34,28 @@
     font-size: 14px;
 }
 
+.photograph-work{
+    margin: 30px 100px
+}
+
+.photograph-work #sortSelect{
+    padding: 8px 16px;
+    border: none;
+    background-color: #901C1C;
+    color: #FAFAFA;
+    border-radius: 5px;
+    font-family: "DM Sans", sans-serif;
+}
+
+.photograph-gallery{
+    margin: 30px 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photograph-gallery.gallery-item{
+   flex-basis: 25%;
+}
 
 .contact_button {
     font-size: 20px;
