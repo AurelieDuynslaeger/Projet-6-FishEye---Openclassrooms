@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (photographer) {
             //on display ses infos comme avec displayData
             displayPhotographerData(photographer)
+            const medias = await getMedias();
+            displayPhotographerMedia(medias.medias);
         } else {
             console.error("Photographe inconnu")
         }
@@ -95,6 +97,7 @@ async function getMedias() {
         //sinon on stocke le fetch dans data et objet js
         const dataMedias = await fetchMedias.json();
         const medias = dataMedias.media;
+        console.log(medias);
         return { medias };
         // retourne uniquement medias
 
@@ -127,7 +130,7 @@ function displayPhotographerMedia(photographer) {
             const video = document.createElement('video');
             video.src = `assets/media/${media.video}`;
             video.controls = true;
-            galleryItem.appendChild(video);
+            itemGallery.appendChild(video);
         }
 
         //titre de l'item
@@ -137,7 +140,7 @@ function displayPhotographerMedia(photographer) {
         const itemLikes = document.createElement('div');
         itemLikes.classList.add('likes');
 
-        const likeIcon = documen.createElement('img');
+        const likeIcon = document.createElement('img');
         //icon Coeur pour les likes
         likeIcon.src = 'assets/icons/heart.svg';
         likeIcon.alt = 'Likes';
@@ -148,8 +151,8 @@ function displayPhotographerMedia(photographer) {
         likes.appendChild(likesCount);
 
         //gallery item a pour enfant titre et likes
-        galleryItem.appendChild(title);
-        galleryItem.appendChild(likes);
+        galleryItem.appendChild(itemTitle);
+        galleryItem.appendChild(itemLikes);
         //gallery a pour enfant item entier
         section.appendChild(galleryItem);
 
