@@ -13,15 +13,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (idPhotograh) {
         //on lance le fetch photographers
         const photographers = await getPhotographers();
+        console.log(photographers); //ok
         //on vient trouver dans photographers, l'id qui correspond à l'id de l'url
         const photographer = photographers.photographers.find(photograph => photograph.id == idPhotograh);
-
         //si le photographe est trouvé
         if (photographer) {
-            //on display ses infos comme avec displayData
-            displayPhotographerData(photographer)
+            console.log(photographer);
+            displayPhotographerData(photographer);
             const medias = await getMedias();
-            displayPhotographerMedia(medias.medias);
+            const photographerMedias = medias.medias.filter(media => media.photographerId == idPhotograh);
+            console.log(photographerMedias);
+            //on display ses infos comme avec displayData
+            displayPhotographerMedia(photographerMedias);
         } else {
             console.error("Photographe inconnu")
         }
@@ -100,8 +103,6 @@ async function getMedias() {
         console.log(medias);
         return { medias };
         // retourne uniquement medias
-
-
     } catch (error) {
         console.error("Erreur: ".error);
         return {
@@ -110,12 +111,12 @@ async function getMedias() {
     }
 }
 
-function displayPhotographerMedia(photographer) {
+function displayPhotographerMedia(medias) {
     //on cible la section de photographer.html
     const section = document.querySelector('.photograph-gallery');
 
     //pour chaque média du photographe, on crée une div avec la class "gallery-item";
-    photographer.media.forEach(media => {
+    medias.forEach(media => {
         const itemGallery = document.createElement('div');
         itemGallery.classList.add('gallery-item');
 
@@ -135,7 +136,7 @@ function displayPhotographerMedia(photographer) {
 
         //titre de l'item
         const itemTitle = document.createElement('h4');
-        title.textContent = media.title;
+        itemTitle.textContent = media.title;
 
         const itemLikes = document.createElement('div');
         itemLikes.classList.add('likes');
@@ -147,14 +148,14 @@ function displayPhotographerMedia(photographer) {
         //compte des likes
         const likesCount = document.createElement('span');
         likesCount.textContent = media.likes;
-        likes.appendChild(likeIcon);
-        likes.appendChild(likesCount);
+        itemLikes.appendChild(likeIcon);
+        itemLikes.appendChild(likesCount);
 
         //gallery item a pour enfant titre et likes
-        galleryItem.appendChild(itemTitle);
-        galleryItem.appendChild(itemLikes);
+        itemGallery.appendChild(itemTitle);
+        itemGallery.appendChild(itemLikes);
         //gallery a pour enfant item entier
-        section.appendChild(galleryItem);
+        section.appendChild(itemGallery);
 
     });
 }
