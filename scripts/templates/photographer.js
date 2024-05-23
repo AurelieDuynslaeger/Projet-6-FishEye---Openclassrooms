@@ -1,10 +1,13 @@
 function photographerTemplate(data) {
     //destructuring : ajout des autres infos necessaires pour la carte photographe
-    const { name, portrait, city, country, tagline, price } = data;
+    //ajout de l'id pour le véhiculer au clik sur une card
+    const { name, portrait, city, country, tagline, price, id } = data;
 
     const picture = `assets/photographers/${portrait}`;
     //texte qui sera display dans l'attribut alt de la balise a
-    const link = `link to ${name} photographer profile`;
+    const ariaLink = `link to ${name} photographer profile`;
+    //lien qui nous emmène vers le profile du photographe où on véhicule l'id
+    const link = `photographer.html?id=${id}`;
 
 
     function getUserCardDOM() {
@@ -13,9 +16,9 @@ function photographerTemplate(data) {
         //ajout de l'élément clickable vers le profile du photographe
         const profileLink = document.createElement('a');
         //définition du texte alternatif pour le lien
-        profileLink.setAttribute("aria-label", link);
+        profileLink.setAttribute("aria-label", ariaLink);
         //lien vide pour le moment
-        profileLink.setAttribute("href", "#");
+        profileLink.setAttribute("href", link);
         const img = document.createElement('img');
         img.setAttribute("src", picture);
         const h2 = document.createElement('h2');
