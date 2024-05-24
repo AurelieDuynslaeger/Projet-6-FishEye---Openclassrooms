@@ -38,7 +38,8 @@
     margin: 30px 100px
 }
 
-.photograph-work #sortSelect{
+.photograph-work #sortSelect, 
+#sortSelect option{
     padding: 8px 16px;
     border: none;
     background-color: #901C1C;
@@ -46,6 +47,7 @@
     border-radius: 5px;
     font-family: "DM Sans", sans-serif;
 }
+
 
 .photograph-gallery{
     display: flex;
