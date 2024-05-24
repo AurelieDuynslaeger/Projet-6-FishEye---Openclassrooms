@@ -185,7 +185,14 @@ function displayPhotographerMedia(medias) {
         itemGallery.appendChild(itemLikes);
         //gallery a pour enfant item entier
         section.appendChild(itemGallery);
+    });
 
+    // Calcul du total des likes
+    //inital à 0
+    //pour chaque media, on ajoute le nb de likes à sumLikes
+    let sumLikes = 0;
+    medias.forEach(media => {
+        sumLikes += media.likes;
     });
 
     //div fixée pour afficher le nb total de likes et prix du photographe
@@ -195,7 +202,8 @@ function displayPhotographerMedia(medias) {
     totalLikes.classList.add('rating');
 
     const ratingLikes = document.createElement("p");
-    ratingLikes.textContent = 297081; //ici il y aurait le véritable nb de likes (logique à implémenter)
+    console.log(sumLikes);
+    ratingLikes.innerText = sumLikes; //ici il y aurait le véritable nb de likes (logique à implémenter)
 
     const likeIcon = document.createElement('img');
     //icon Coeur pour les likes totaux
@@ -211,6 +219,8 @@ function displayPhotographerMedia(medias) {
 
     rating.appendChild(totalLikes);
     rating.appendChild(price);
+
+
 
 }
 
