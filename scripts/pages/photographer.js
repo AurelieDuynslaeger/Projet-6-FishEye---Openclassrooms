@@ -56,23 +56,6 @@ function displayPhotographerData(photographer) {
     //on cible les sections de photographer.html
     const header = document.querySelector('.photograph-header');
 
-    // const rating = document.querySelector('.photograph-rating');
-
-    // const totalLikes = document.createElement('div');
-    // totalLikes.classList.add('photographer-likes-and-price');
-
-    // const ratingLikes = document.createElement("p");
-    // ratingLikes.textContent = 297081;
-
-    // const likeIcon = document.createElement('img');
-    // //icon Coeur pour les likes totaux
-    // likeIcon.src = 'assets/icons/heart.svg';
-    // likeIcon.alt = 'Likes';
-
-    // const price = document.createElement('p');
-    // price.textContent = `${photographer.price}€/jour`;
-
-
     //h1 qui display le nom
     const h1 = document.createElement('h1');
     h1.textContent = photographer.name;
@@ -93,11 +76,6 @@ function displayPhotographerData(photographer) {
     identityInfo.appendChild(tagline);
 
 
-    // totalLikes.appendChild(ratingLikes);
-    // totalLikes.appendChild(likeIcon);
-
-    // rating.appendChild(totalLikes);
-    // rating.appendChild(price);
 
     //on insère cette div dans le header avant le boutton de contact
     header.insertBefore(identityInfo, header.querySelector('.contact_button'));
@@ -209,6 +187,31 @@ function displayPhotographerMedia(medias) {
         section.appendChild(itemGallery);
 
     });
+
+    //div fixée pour afficher le nb total de likes et prix du photographe
+    const rating = document.querySelector('.photographer-rating');
+
+    const totalLikes = document.createElement('div');
+    totalLikes.classList.add('rating');
+
+    const ratingLikes = document.createElement("p");
+    ratingLikes.textContent = 297081; //ici il y aurait le véritable nb de likes (logique à implémenter)
+
+    const likeIcon = document.createElement('img');
+    //icon Coeur pour les likes totaux
+    likeIcon.src = 'assets/icons/heart.svg';
+    likeIcon.alt = 'Likes';
+
+    const price = document.createElement('p');
+    price.textContent = `€/jour`;
+
+
+    totalLikes.appendChild(ratingLikes);
+    totalLikes.appendChild(likeIcon);
+
+    rating.appendChild(totalLikes);
+    rating.appendChild(price);
+
 }
 
 //cibler le select

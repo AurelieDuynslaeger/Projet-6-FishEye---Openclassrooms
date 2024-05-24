@@ -48,7 +48,6 @@
     font-family: "DM Sans", sans-serif;
 }
 
-
 .photograph-gallery{
     display: flex;
     align-items: center;
@@ -98,6 +97,31 @@
 .item-rating img {
     cursor: pointer;
 }
+
+.photographer-rating{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 12px;
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    background-color: #DB8876;
+    width: 20%;
+    height: 4rem;
+    color:#312E2E;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.rating{
+    display: flex;
+}
+.rating img{
+    margin-left: 4px;
+}
+
+
 
 .contact_button {
     font-size: 20px;
