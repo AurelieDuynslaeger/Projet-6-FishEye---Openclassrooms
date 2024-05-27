@@ -40,24 +40,24 @@
 			<div class="modal" role="dialog" aria-label="contact form">
 				<header class="modal_header">
           <h2 class="header_title"></h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" onclick="closeModal()" alt="close modal"/>
         </header>
-				<form>
+				<form role="group" aria-labelledby="contact form inputs">
           <div class="input-group">
               <label for="prenom">Prénom</label>
-              <input type="text" id="prenom" name="prenom" />
+              <input type="text" id="prenom" name="prenom" aria-labelledby="first name" aria-describedby="first name input"/>
           </div>
           <div class="input-group">
               <label for="nom">Nom</label>
-              <input type="text" id="nom" name="nom" />
+              <input type="text" id="nom" name="nom" aria-labelledby="last name" aria-describedby="last name input"/>
           </div>
           <div class="input-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" />
+              <input type="email" id="email" name="email" aria-labelledby="email" aria-describedby="email input" aria-required="true"/>
           </div>
           <div class="input-group">
               <label for="message">Message</label>
-              <textarea id="message" name="message"></textarea>
+              <textarea id="message" name="message" aria-labelledby="message" aria-describedby="message input"></textarea>
           </div>
           <button class="contact_button" type="submit">Envoyer</button>
 				</form>

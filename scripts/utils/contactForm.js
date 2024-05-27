@@ -47,7 +47,6 @@ async function getPhotographers() {
 
 
 function displayModal() {
-    console.log('modal clik');
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
 }

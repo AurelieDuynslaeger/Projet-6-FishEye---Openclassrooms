@@ -119,120 +119,120 @@ async function getMedias() {
 let currentMedias = [];
 
 //affichage des média d'un photographe par l'id
-// function displayPhotographerMedia(medias) {
-//     //on stocke par défaut les médias récup dans le fetch,
-//     //l'affichage changera selon le tri ensuite
-//     currentMedias = medias;
-//     //on cible la section de photographer.html
-//     const section = document.querySelector('.photograph-gallery');
+function displayPhotographerMedia(medias) {
+    //on stocke par défaut les médias récup dans le fetch,
+    //l'affichage changera selon le tri ensuite
+    currentMedias = medias;
+    //on cible la section de photographer.html
+    const section = document.querySelector('.photograph-gallery');
 
-//     //on efface le contenu actuel (tris)
-//     section.innerHTML = '';
+    //on efface le contenu actuel (tris)
+    section.innerHTML = '';
 
-//     //pour chaque média du photographe, on crée une div avec la class "gallery-item";
-//     medias.forEach((media, index) => {
-//         //utilisation de la factory pour le média
-//         // const mediaDisplay = new MediasFactory(media);
-//         const itemGallery = document.createElement('div');
-//         itemGallery.classList.add('gallery-item');
-//         const item = document.createElement('div');
-//         item.classList.add('item');
+    //pour chaque média du photographe, on crée une div avec la class "gallery-item";
+    medias.forEach((media, index) => {
+        //utilisation de la factory pour le média
+        // const mediaDisplay = new MediasFactory(media);
+        const itemGallery = document.createElement('div');
+        itemGallery.classList.add('gallery-item');
+        const item = document.createElement('div');
+        item.classList.add('item');
 
-//         if (media.image) {
-//             //si le média est une photo
-//             const img = document.createElement('img');
-//             img.src = `assets/media/${media.image}`;
-//             img.alt = media.title;
-//             item.appendChild(img);
-//         } else if (media.video) {
-//             //si le média est une photo
-//             const video = document.createElement('video');
-//             video.src = `assets/media/${media.video}`;
-//             video.controls = true;
-//             item.appendChild(video);
-//         }
+        if (media.image) {
+            //si le média est une photo
+            const img = document.createElement('img');
+            img.src = `assets/media/${media.image}`;
+            img.alt = media.title;
+            item.appendChild(img);
+        } else if (media.video) {
+            //si le média est une photo
+            const video = document.createElement('video');
+            video.src = `assets/media/${media.video}`;
+            video.controls = true;
+            item.appendChild(video);
+        }
 
-//         //écouteur d'événements pour ouvrir la lightbox sur l'item en cours (index)
-//         item.addEventListener('click', () => {
-//             openLightbox(index);
-//         });
-
-
-//         //titre de l'item
-//         const itemTitle = document.createElement('h3');
-//         itemTitle.textContent = media.title;
-
-//         const itemLikes = document.createElement('div');
-//         itemLikes.classList.add('likes');
-//         const spanrate = document.createElement('div');
-//         spanrate.classList.add('item-rating');
-
-//         const likeIcon = document.createElement('img');
-//         //icon Coeur pour les likes
-//         likeIcon.src = 'assets/icons/heart.svg';
-//         likeIcon.alt = 'Likes';
-//         //compte des likes
-//         const likesCount = document.createElement('span');
-//         likesCount.textContent = media.likes;
-//         likesCount.classList.add('likes-count');
-//         itemLikes.appendChild(itemTitle);
-
-//         //écouteur d'évenement sur l'icone pr le compteur de likes qui s'incrémente : 
-//         likeIcon.addEventListener('click', () => {
-//             //on récup d'abord le nombre de likes actuel
-//             const likesCount = itemGallery.querySelector(".likes-count");
-//             let actualLikes = parseInt(likesCount.textContent);//valeur de likesCount
-//             actualLikes++; //mise à jour au clik du compteur
-
-//             likesCount.textContent = actualLikes; //affichage mis à jour
-//         })
-
-//         //gallery item a pour enfant titre et likes
-//         spanrate.appendChild(likesCount);
-//         spanrate.appendChild(likeIcon);
-
-//         itemLikes.appendChild(spanrate);
-//         itemGallery.appendChild(item);
-//         itemGallery.appendChild(itemLikes);
-//         //gallery a pour enfant item entier
-//         section.appendChild(itemGallery);
-//     });
-
-//     // Calcul du total des likes
-//     //inital à 0
-//     //pour chaque media, on ajoute le nb de likes à sumLikes
-//     let sumLikes = 0;
-//     medias.forEach(media => {
-//         sumLikes += media.likes;
-//     });
-
-//     //div fixée pour afficher le nb total de likes et prix du photographe
-//     const rating = document.querySelector('.photographer-rating');
-
-//     const totalLikes = document.createElement('div');
-//     totalLikes.classList.add('rating');
-
-//     const ratingLikes = document.createElement("p");
-//     console.log(sumLikes);
-//     ratingLikes.innerText = sumLikes; //ici il y aurait le véritable nb de likes (logique à implémenter)
-
-//     const likeIcon = document.createElement('img');
-//     //icon Coeur pour les likes totaux
-//     likeIcon.src = 'assets/icons/heart.svg';
-//     likeIcon.alt = 'Likes';
-
-//     const price = document.createElement('p');
-//     price.textContent = `€/jour`;
+        //écouteur d'événements pour ouvrir la lightbox sur l'item en cours (index)
+        item.addEventListener('click', () => {
+            openLightbox(index);
+        });
 
 
-//     totalLikes.appendChild(ratingLikes);
-//     totalLikes.appendChild(likeIcon);
+        //titre de l'item
+        const itemTitle = document.createElement('h3');
+        itemTitle.textContent = media.title;
 
-//     rating.appendChild(totalLikes);
-//     rating.appendChild(price);
+        const itemLikes = document.createElement('div');
+        itemLikes.classList.add('likes');
+        const spanrate = document.createElement('div');
+        spanrate.classList.add('item-rating');
 
-//     displayLightbox({ photograph, medias });
-// }
+        const likeIcon = document.createElement('img');
+        //icon Coeur pour les likes
+        likeIcon.src = 'assets/icons/heart.svg';
+        likeIcon.alt = 'Likes';
+        //compte des likes
+        const likesCount = document.createElement('span');
+        likesCount.textContent = media.likes;
+        likesCount.classList.add('likes-count');
+        itemLikes.appendChild(itemTitle);
+
+        //écouteur d'évenement sur l'icone pr le compteur de likes qui s'incrémente : 
+        likeIcon.addEventListener('click', () => {
+            //on récup d'abord le nombre de likes actuel
+            const likesCount = itemGallery.querySelector(".likes-count");
+            let actualLikes = parseInt(likesCount.textContent);//valeur de likesCount
+            actualLikes++; //mise à jour au clik du compteur
+
+            likesCount.textContent = actualLikes; //affichage mis à jour
+        })
+
+        //gallery item a pour enfant titre et likes
+        spanrate.appendChild(likesCount);
+        spanrate.appendChild(likeIcon);
+
+        itemLikes.appendChild(spanrate);
+        itemGallery.appendChild(item);
+        itemGallery.appendChild(itemLikes);
+        //gallery a pour enfant item entier
+        section.appendChild(itemGallery);
+    });
+
+    // Calcul du total des likes
+    //inital à 0
+    //pour chaque media, on ajoute le nb de likes à sumLikes
+    let sumLikes = 0;
+    medias.forEach(media => {
+        sumLikes += media.likes;
+    });
+
+    //div fixée pour afficher le nb total de likes et prix du photographe
+    const rating = document.querySelector('.photographer-rating');
+
+    const totalLikes = document.createElement('div');
+    totalLikes.classList.add('rating');
+
+    const ratingLikes = document.createElement("p");
+    console.log(sumLikes);
+    ratingLikes.innerText = sumLikes; //ici il y aurait le véritable nb de likes (logique à implémenter)
+
+    const likeIcon = document.createElement('img');
+    //icon Coeur pour les likes totaux
+    likeIcon.src = 'assets/icons/heart.svg';
+    likeIcon.alt = 'Likes';
+
+    const price = document.createElement('p');
+    price.textContent = `€/jour`;
+
+
+    totalLikes.appendChild(ratingLikes);
+    totalLikes.appendChild(likeIcon);
+
+    rating.appendChild(totalLikes);
+    rating.appendChild(price);
+
+    displayLightbox({ photograph, medias });
+}
 
 // Fonction pour créer et afficher la lightbox
 // function createLightbox(media) {
