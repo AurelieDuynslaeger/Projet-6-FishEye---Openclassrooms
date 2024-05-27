@@ -1,5 +1,9 @@
 @import url("lightbox.css");
 
+.no-scroll {
+    overflow: hidden;
+ }
+ 
 #contact_modal {
     display: none;
 }
@@ -85,9 +89,11 @@
     font-weight: 100;
 }
 
-.likes img{
-    width: 15px;
-    height: 15px;
+.item-rating .heart-icon svg{
+    width: 20px;
+    height: 20px;
+   color: #901C1C;
+    cursor: pointer;
 }
 
 .item-rating{
@@ -95,9 +101,7 @@
     align-items: center;
 }
 
-.item-rating img {
-    cursor: pointer;
-}
+
 
 .photographer-rating{
     display: flex;
@@ -108,11 +112,12 @@
     bottom: 0;
     right: 0;
     background-color: #DB8876;
-    width: 12%;
-    height: 4rem;
+    width: 18%;
+    height: 3rem;
     color:#312E2E;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-weight: bold;
 }
 
 .rating{

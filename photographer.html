@@ -11,7 +11,7 @@
     <header>
       <a href="./index.html" aria-label="return homepage"><img src="assets/images/logo.png" class="logo" alt="fisheye logo"/></a>
     </header>
-    <main id="main">
+    <main id="main" aria-hidden="false">
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()" aria-label="Contact Me">Contactez-moi</button>
       </div>
@@ -36,7 +36,7 @@
           <h3 id="lightbox_title"></h3>
       </div>
   </div>
-    <div id="contact_modal">
+    <div id="contact_modal" aria-hidden="true">
 			<div class="modal" role="dialog" aria-label="contact_form">
 				<div class="modal_header">
           <img src="assets/icons/close.svg" onclick="closeModal()" alt="close modal" class="cross"/>

@@ -126,6 +126,7 @@ function displayPhotographerMedia(photographer, medias) {
         spanrate.classList.add('item-rating');
 
         const likeIcon = document.createElement('img');
+        likeIcon.classList.add('heart-icon');
         //icon Coeur pour les likes
         likeIcon.src = 'assets/icons/heart.svg';
         likeIcon.alt = 'Likes';
@@ -175,12 +176,13 @@ function displayPhotographerMedia(photographer, medias) {
     ratingLikes.innerText = sumLikes; //ici il y aurait le véritable nb de likes (logique à implémenter)
 
     const likeIcon = document.createElement('img');
+    likeIcon.classList.add('heart-icon');
     //icon Coeur pour les likes totaux
     likeIcon.src = 'assets/icons/heart.svg';
     likeIcon.alt = 'Likes';
 
     const price = document.createElement('p');
-    price.textContent = `€/jour`;
+    price.textContent = `${photographer.price} € / jour`;
 
 
     totalLikes.appendChild(ratingLikes);

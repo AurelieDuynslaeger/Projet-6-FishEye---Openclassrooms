@@ -48,11 +48,21 @@ async function getPhotographers() {
 
 
 function displayModal() {
+    const main = document.getElementById('main');
+    main.setAttribute('aria-hidden', 'true');
     const modal = document.getElementById("contact_modal");
+    modal.setAttribute('aria-hidden', 'false');
+    const body = document.body;
+    body.classList.add('no-scroll');
     modal.style.display = "block";
 }
 
 function closeModal() {
+    const main = document.getElementById('main');
+    main.setAttribute('aria-hidden', 'false');
     const modal = document.getElementById("contact_modal");
+    modal.setAttribute('aria-hidden', 'true');
     modal.style.display = "none";
+    const body = document.body;
+    body.classList.remove('no-scroll');
 }
