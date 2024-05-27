@@ -113,8 +113,6 @@ async function getMedias() {
     }
 }
 
-
-
 //contenu affiché selon le tri ou non
 let currentMedias = [];
 
@@ -149,7 +147,7 @@ function displayPhotographerMedia(medias) {
         }
 
         //titre de l'item
-        const itemTitle = document.createElement('h4');
+        const itemTitle = document.createElement('h3');
         itemTitle.textContent = media.title;
 
         const itemLikes = document.createElement('div');
