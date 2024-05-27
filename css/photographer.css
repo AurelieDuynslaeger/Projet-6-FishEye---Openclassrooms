@@ -119,7 +119,7 @@
 .rating img{
     margin-left: 4px;
 }
-
+/* 
 #lightBox{
     position: absolute;
     top: 5rem;
@@ -129,14 +129,14 @@
     padding: 5rem;
     background-color: #FAFAFA;
     display: flex;
-}
+} */
 
 
-#lightBox span{
+/* #lightBox span{
     font-size: 10rem;
     color: #901C1C;
 }
-
+ */
 
 
 .contact_button {

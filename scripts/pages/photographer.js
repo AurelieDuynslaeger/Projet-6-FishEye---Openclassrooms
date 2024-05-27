@@ -230,22 +230,33 @@ function displayPhotographerMedia(medias) {
     rating.appendChild(price);
 }
 
-//lightbox
-function openLightbox(index) {
+// Fonction pour créer et afficher la lightbox
+function createLightbox(media) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
 
-    const media = currentMedias[index];
-
+    // Affichage du média dans la lightbox
     if (media.image) {
         // Si c'est une image
-        lightboxImg.src = `assets/media/${media.image}`;
+        lightboxImg.innerHTML = `<img src="assets/media/${media.image}" alt="${media.title}">`;
     } else if (media.video) {
         // Si c'est une vidéo
         lightboxImg.innerHTML = `<video controls><source src="assets/media/${media.video}" type="video/mp4"></video>`;
     }
 
+    // Affichage du titre du média dans la lightbox
+    lightboxTitle.textContent = media.title;
+
+    // Affichage de la lightbox
     lightbox.style.display = 'block';
+}
+
+
+//lightbox
+function openLightbox(index) {
+    const media = currentMedias[index];
+    createLightbox(media);
 }
 
 function closeLightBox() {
