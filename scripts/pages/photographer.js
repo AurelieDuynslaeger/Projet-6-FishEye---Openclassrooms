@@ -50,6 +50,7 @@ function displayPhotographerData(photographer) {
     const tagline = document.createElement('p');
     tagline.textContent = photographer.tagline;
 
+
     //div .photographer-info qui regroupe nom, ville, tagline
     const identityInfo = document.createElement('div');
     identityInfo.classList.add("photographer-info");

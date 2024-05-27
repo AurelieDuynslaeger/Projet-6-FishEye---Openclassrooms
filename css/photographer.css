@@ -124,7 +124,7 @@
 
 #contact_modal{
     position: fixed;
-    padding: 2rem 0;
+    padding: 1.5rem 0;
     top: 0;
     left: 0;
     width: 100%;
@@ -170,7 +170,7 @@
 }
 
 .header_title{
-    font-size: 60px;
+    font-size: 55px;
     font-weight: 200;
     margin-bottom: 1rem;
 }
@@ -193,7 +193,7 @@ form div {
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
+    margin-bottom: 10px;
 }
 
 form input, form textarea {
@@ -202,11 +202,11 @@ form input, form textarea {
     border-radius: 5px;
 }
 form textarea {
-    height: 120px;
+    height: 110px;
 }
 
 form input{
-    height: 60px;
+    height: 55px;
 }
 
 .hidden {
