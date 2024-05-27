@@ -1,3 +1,5 @@
+@import url("lightbox.css");
+
 #contact_modal {
     display: none;
 }
@@ -119,38 +121,17 @@
 .rating img{
     margin-left: 4px;
 }
-/* 
-#lightbox{
-    position: absolute;
-    top: 5rem;
-    left: 50%;
-    height: 550px;
+
+#contact_modal{
+    position: fixed;
+    padding: 4rem 0;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 5rem;
-    background-color: #FAFAFA;
-    display: flex;
-} */
-
-
-/* #lightbox span{
-    font-size: 10rem;
-    color: #901C1C;
+    height: 100%;
+    background-color: rgba(196, 196, 196, 0.4);
+    /* backdrop-filter: blur(1px); */
 }
- */
-
- /* <div id="lightbox" class="lightbox" aria-label="image closeup view" role="dialog">
-      <span class="close" onclick="closeLightbox()">&times;</span>
-      <div class="lightbox-content">
-          <div class="navigation">
-              <a class="prev" onclick="prevMedia()">&#10094;</a>
-              <div id="lightbox-media"></div>
-              <a class="next" onclick="nextMedia()">&#10095;</a>
-          </div>
-          <h3 id="lightbox-title"></h3>
-      </div>
-  </div> */
-
-
 .contact_button {
     font-size: 20px;
     font-weight: bold;
@@ -167,12 +148,12 @@
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 35px;
+    padding: 25px;
     margin: auto;
 }
 
@@ -200,7 +181,7 @@ form {
 
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 30px;
 }
 
 form div {
@@ -211,9 +192,14 @@ form div {
     margin-bottom: 26px;
 }
 
-form input {
+form input, form textarea {
     width: 100%;
-    height: 68px;
+    height: 60px;
     border: none;
     border-radius: 5px;
+}
+form textarea {
+  
+    height: 120px;
+   
 }

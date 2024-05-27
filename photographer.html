@@ -28,33 +28,43 @@
       </div>
       <div class="photographer-rating"></div>
     </main>
-    <div id="lightbox" class="lightbox" aria-label="image closeup view" role="dialog">
-      <span class="close" onclick="closeLightbox()">&times;</span>
-      <div class="lightbox-content">
-          <div class="navigation">
-              <a class="prev" onclick="prevMedia()">&#10094;</a>
-              <div id="lightbox-media"></div>
-              <a class="next" onclick="nextMedia()">&#10095;</a>
-          </div>
-          <h3 id="lightbox-title"></h3>
+    <div id="lightbox" class="lightbox" aria-label="image closeup view" role="dialog" aria-modal="true">
+      <button class="lightbox_close" onclick="closeLightbox()" aria-label="close dialog">&times;</button>
+      <button class="lightbox_prev" onclick="prevMedia()" aria-label="previous media">&#10094;</button>
+      <button class="lightbox_next" onclick="nextMedia()" aria-label="next media">&#10095;</button>
+      <div id="lightbox_container" aria-label="current media" role="media">
+          <h3 id="lightbox_title"></h3>
       </div>
   </div>
     <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
+			<div class="modal" role="dialog" aria-label="contact form">
+				<header class="modal_header">
+          <h2 class="header_title"></h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
 				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
+          <div class="input-group">
+              <label for="prenom">Prénom</label>
+              <input type="text" id="prenom" name="prenom" />
+          </div>
+          <div class="input-group">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" name="nom" />
+          </div>
+          <div class="input-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" />
+          </div>
+          <div class="input-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message"></textarea>
+          </div>
+          <button class="contact_button" type="submit">Envoyer</button>
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/pages/photographer.js" type="module"></script>
+    <script src="/scripts/utils/lightbox.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
     <!-- Factories -->
     <script src="scripts/factories/MediasFactory.js"></script>
