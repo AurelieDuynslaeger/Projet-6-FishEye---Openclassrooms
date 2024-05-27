@@ -129,6 +129,8 @@ function displayPhotographerMedia(medias) {
 
     //pour chaque média du photographe, on crée une div avec la class "gallery-item";
     medias.forEach(media => {
+        //utilisation de la factory pour le média
+        const mediaDisplay = new MediasFactory(media);
         const itemGallery = document.createElement('div');
         itemGallery.classList.add('gallery-item');
 
