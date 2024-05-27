@@ -233,16 +233,16 @@ function displayPhotographerMedia(medias) {
 // Fonction pour créer et afficher la lightbox
 function createLightbox(media) {
     const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxMedia = document.getElementById('lightbox-media');
     const lightboxTitle = document.getElementById('lightbox-title');
 
     // Affichage du média dans la lightbox
     if (media.image) {
         // Si c'est une image
-        lightboxImg.innerHTML = `<img src="assets/media/${media.image}" alt="${media.title}">`;
+        lightboxMedia.innerHTML = `<img src="assets/media/${media.image}" alt="${media.title}">`;
     } else if (media.video) {
         // Si c'est une vidéo
-        lightboxImg.innerHTML = `<video controls><source src="assets/media/${media.video}" type="video/mp4"></video>`;
+        lightboxMedia.innerHTML = `<video controls><source src="assets/media/${media.video}" type="video/mp4"></video>`;
     }
 
     // Affichage du titre du média dans la lightbox

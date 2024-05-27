@@ -28,13 +28,17 @@
       </div>
       <div class="photographer-rating"></div>
     </main>
-    <div id="lightBox" class="lightBox" aria-label="image closeup view" role="dialog">
-      <span class="close" aria-label="close dialog">&times;</span>
+    <div id="lightbox" class="lightbox" aria-label="image closeup view" role="dialog">
+      <span class="close" onclick="closeLightbox()">&times;</span>
       <div class="lightbox-content">
-        <img id="lightbox-img">
-        <!-- balise video généré dans la fonction lightbox -->
-    </div>
-    </div>
+          <div class="navigation">
+              <a class="prev" onclick="prevMedia()">&#10094;</a>
+              <div id="lightbox-media"></div>
+              <a class="next" onclick="nextMedia()">&#10095;</a>
+          </div>
+          <h3 id="lightbox-title"></h3>
+      </div>
+  </div>
     <div id="contact_modal">
 			<div class="modal">
 				<header>
