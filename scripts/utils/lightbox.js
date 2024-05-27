@@ -1,5 +1,4 @@
-export const displayLightbox = medias => {
-
+export function displayLightbox({ photographer, medias }) {
     const lightbox = document.querySelector('.lightbox');
     const btnClose = document.querySelector('.lightbox_close');
     const btnPrevious = document.querySelector('.lightbox_prev');
@@ -7,14 +6,12 @@ export const displayLightbox = medias => {
     const lightboxMedia = document.querySelector('.lightbox_container');
     const mediaProvider = Array.from(document.querySelectorAll('.gallery_card a'));
 
-    const photographer = medias.photographer;
-    const mediasList = medias.medias;
     let currentIndex = 0;
 
     mediaProvider.forEach(media => {
         media.addEventListener('click', () => {
             const mediaId = media.dataset.media;
-            const mediaIndex = mediasList.findIndex(media => media.id == mediaId);
+            const mediaIndex = medias.findIndex(media => media.id == mediaId);
             currentIndex = mediaIndex;
             lightbox.style.display = 'flex';
             btnClose.focus();
@@ -23,7 +20,7 @@ export const displayLightbox = medias => {
     });
 
     const lightboxTemplate = () => {
-        const media = mediasList[currentIndex];
+        const media = medias[currentIndex];
         if (media.image) {
             lightboxMedia.innerHTML = `<img src="assets/media/${media.image}" alt="${media.title}">`;
         } else if (media.video) {
@@ -38,15 +35,14 @@ export const displayLightbox = medias => {
     };
 
     const nextMedia = () => {
-        currentIndex = (currentIndex - 1 + mediasList.length) % mediasList.length;
+        currentIndex = (currentIndex + 1) % medias.length;
         lightboxTemplate();
     };
 
     const previousMedia = () => {
-
+        currentIndex = (currentIndex - 1 + medias.length) % medias.length;
+        lightboxTemplate();
     };
-
-
 
     document.addEventListener('keyup', e => {
         switch (e.key) {
@@ -59,10 +55,11 @@ export const displayLightbox = medias => {
             case 'ArrowRight':
                 nextMedia();
                 break;
-        };
+        }
     });
 
-    btnPrevious.addEventListener('click', () => previousMedia());
-    btnNext.addEventListener('click', () => nextMedia());
-    btnClose.addEventListener('click', () => closeLightbox());
-};
+    btnPrevious.addEventListener('click', previousMedia);
+    btnNext.addEventListener('click', nextMedia);
+    btnClose.addEventListener('click', closeLightbox);
+}
+

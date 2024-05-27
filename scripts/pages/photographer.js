@@ -1,4 +1,5 @@
 import { displayLightbox } from "../utils/lightbox.js";
+import { getPhotographers, getMedias } from '../utils/data.js';
 
 //récuperer l'id véhiculé dans l'url
 document.addEventListener("DOMContentLoaded", async () => {
@@ -11,50 +12,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     //si un id est trouvé
     if (idPhotograh) {
         //on lance le fetch photographers
-        const photographers = await getPhotographers();
+        const { photographers } = await getPhotographers();
         console.log(photographers); //ok
         //on vient trouver dans photographers, l'id qui correspond à l'id de l'url
-        const photographer = photographers.photographers.find(photograph => photograph.id == idPhotograh);
+        const photographer = photographers.find(photograph => photograph.id == idPhotograh);
         //si le photographe est trouvé
         if (photographer) {
             console.log(photographer);
             displayPhotographerData(photographer);
-            const medias = await getMedias();
-            const photographerMedias = medias.medias.filter(media => media.photographerId == idPhotograh);
+            const { medias } = await getMedias();
+            const photographerMedias = medias.filter(media => media.photographerId == idPhotograh);
             console.log(photographerMedias);
             //on display ses infos comme avec displayData
-            displayPhotographerMedia(photographerMedias);
+            displayPhotographerMedia(photographer, photographerMedias);
         } else {
             console.error("Photographe inconnu")
         }
     }
 });
 
-//récupération de tous les photographes
-async function getPhotographers() {
-    try {
-        // fetch vers le fichier json
-        const fetchPhotographers = await fetch("data/photographers.json");
-        //si autre réponse que 200 alors afficher l'erreur
-        if (!fetchPhotographers.ok) {
-            throw new Error('Erreur récup data')
-        }
-        //sinon on stocke le fetch dans data et objet js
-        const data = await fetchPhotographers.json();
-        return {
-            //on attribue à photographers, ce que l'on récupère dans data
-            photographers: data.photographers
-        };
-    } catch (error) {
-        console.error("Erreur: ".error);
-        return {
-            photographers: []
-        };
-    }
-}
 
 //affichage des données des photographe home page
 function displayPhotographerData(photographer) {
+
     //on cible les sections de photographer.html
     const header = document.querySelector('.photograph-header');
 
@@ -77,11 +57,8 @@ function displayPhotographerData(photographer) {
     identityInfo.appendChild(location);
     identityInfo.appendChild(tagline);
 
-
-
     //on insère cette div dans le header avant le boutton de contact
     header.insertBefore(identityInfo, header.querySelector('.contact_button'));
-
 
     //on display la photo de profile avec la src et le alt text pour le nom du photograph
     const picture = document.createElement('img');
@@ -92,34 +69,14 @@ function displayPhotographerData(photographer) {
     header.appendChild(picture);
 }
 
-//récupération de tous les médias
-async function getMedias() {
-    try {
-        // fetch vers le fichier json
-        const fetchMedias = await fetch("data/photographers.json");
-        //si autre réponse que 200 alors afficher l'erreur
-        if (!fetchMedias.ok) {
-            throw new Error('Erreur récup data')
-        }
-        //sinon on stocke le fetch dans data et objet js
-        const dataMedias = await fetchMedias.json();
-        const medias = dataMedias.media;
-        console.log(medias);
-        return { medias };
-        // retourne uniquement medias
-    } catch (error) {
-        console.error("Erreur: ".error);
-        return {
-            medias: []
-        };
-    }
-}
+
+
 
 //contenu affiché selon le tri ou non
 let currentMedias = [];
 
 //affichage des média d'un photographe par l'id
-function displayPhotographerMedia(medias) {
+function displayPhotographerMedia(photographer, medias) {
     //on stocke par défaut les médias récup dans le fetch,
     //l'affichage changera selon le tri ensuite
     currentMedias = medias;
@@ -231,40 +188,18 @@ function displayPhotographerMedia(medias) {
     rating.appendChild(totalLikes);
     rating.appendChild(price);
 
-    displayLightbox({ photograph, medias });
+    displayLightbox({ photographer, medias });
 }
-
-// Fonction pour créer et afficher la lightbox
-// function createLightbox(media) {
-//     const lightbox = document.getElementById('lightbox');
-//     const lightboxMedia = document.getElementById('lightbox_container');
-//     const lightboxTitle = document.getElementById('lightbox_title');
-
-//     // Affichage du média dans la lightbox
-//     if (media.image) {
-//         // Si c'est une image
-//         lightboxMedia.innerHTML = `<img src="assets/media/${media.image}" alt="${media.title}" class="media">`;
-//     } else if (media.video) {
-//         // Si c'est une vidéo
-//         lightboxMedia.innerHTML = `<video controls><source src="assets/media/${media.video}" type="video/mp4" class="media"></video>`;
-//     }
-
-//     // Affichage du titre du média dans la lightbox
-//     lightboxTitle.textContent = media.title;
-
-//     // Affichage de la lightbox
-//     lightbox.style.display = 'block';
-// }
 
 
 //lightbox
 function openLightbox(index) {
     const media = currentMedias[index];
-    createLightbox(media);
+    displayLightbox(photographer, media);
 }
 
 //cibler le select
-const btn_select = document.getElementById("sortSelect");
+const sortSelect = document.getElementById("sortSelect");
 
 //écouteur d'event pour le changement de sélection
 sortSelect.addEventListener("change", handleSortChange);

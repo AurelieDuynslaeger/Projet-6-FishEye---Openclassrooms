@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         //on vient trouver dans photographers, l'id qui correspond à l'id de l'url
         const photographer = photographers.photographers.find(photograph => photograph.id == idPhotograh);
 
-        const header = document.querySelector('modal_header');
-        const h2 = document.querySelector("header_title");
+        const header = document.querySelector('.modal_header');
+        const h2 = document.querySelector(".header_title");
         h2.textContent = `Contactez-Moi ${photographer.name}`;
         header.appendChild(h2);
 

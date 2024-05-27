@@ -1,4 +1,4 @@
-function photographerTemplate(data) {
+export function photographerTemplate(data) {
     //destructuring : ajout des autres infos necessaires pour la carte photographe
     //ajout de l'id pour le véhiculer au clik sur une card
     const { name, portrait, city, country, tagline, price, id } = data;
@@ -21,7 +21,7 @@ function photographerTemplate(data) {
         profileLink.setAttribute("href", link);
         const img = document.createElement('img');
         img.setAttribute("src", picture);
-        img.setAttribute("alt", name);
+        img.setAttribute("alt", `${name} picture`);
         const h2 = document.createElement('h2');
         h2.textContent = name;
 

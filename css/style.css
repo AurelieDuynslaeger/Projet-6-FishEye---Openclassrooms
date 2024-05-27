@@ -52,12 +52,12 @@ header h1 {
 }
 .photographer_section article h3 {
     color: #901C1C;
-    font-size: 12px;
+    font-size: 16px;
     margin-bottom: 8px;
 }
 .photographer_section article p, 
 .photographer_section article span{
-    font-size: 10px;
+    font-size: 14px;
     margin-bottom: 8px;
 }
 
