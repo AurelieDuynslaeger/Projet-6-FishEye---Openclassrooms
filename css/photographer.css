@@ -124,7 +124,7 @@
 
 #contact_modal{
     position: fixed;
-    padding: 4rem 0;
+    padding: 2rem 0;
     top: 0;
     left: 0;
     width: 100%;
@@ -157,20 +157,24 @@
     margin: auto;
 }
 
-.modal header {
+.modal_header {
     justify-content: space-between;
     width: 100%;
+    display: flex; 
+    flex-direction: row;
+    align-items:first baseline;
 }
 
-.modal header img {
+.cross{
     cursor: pointer;
 }
 
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+.header_title{
+    font-size: 60px;
+    font-weight: 200;
+    margin-bottom: 1rem;
 }
+
 
 form {
     display: flex;
@@ -194,12 +198,22 @@ form div {
 
 form input, form textarea {
     width: 100%;
-    height: 60px;
     border: none;
     border-radius: 5px;
 }
 form textarea {
-  
     height: 120px;
-   
 }
+
+form input{
+    height: 60px;
+}
+
+.hidden {
+    height: 1px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: -10000px;
+    width: 1px;
+ }

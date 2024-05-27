@@ -37,27 +37,30 @@
       </div>
   </div>
     <div id="contact_modal">
-			<div class="modal" role="dialog" aria-label="contact form">
-				<header class="modal_header">
-          <h2 class="header_title"></h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" alt="close modal"/>
-        </header>
-				<form role="group" aria-labelledby="contact form inputs">
+			<div class="modal" role="dialog" aria-label="contact_form">
+				<div class="modal_header">
+          <img src="assets/icons/close.svg" onclick="closeModal()" alt="close modal" class="cross"/>
+        </div>
+				<form>
           <div class="input-group">
               <label for="prenom">Prénom</label>
-              <input type="text" id="prenom" name="prenom" aria-labelledby="first name" aria-describedby="first name input"/>
+              <input type="text" id="prenom" name="prenom" aria-labelledby="prenom" aria-describedby="prenom_help"/>
+              <span id="prenom_help" class="hidden">Entrez votre prénom</span>
           </div>
           <div class="input-group">
               <label for="nom">Nom</label>
-              <input type="text" id="nom" name="nom" aria-labelledby="last name" aria-describedby="last name input"/>
+              <input type="text" id="nom" name="nom" aria-labelledby="nom" aria-describedby="nom_help"/>
+              <span id="nom_help" class="hidden">Entrez votre nom</span>
           </div>
           <div class="input-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" aria-labelledby="email" aria-describedby="email input" aria-required="true"/>
+              <input type="email" id="email" name="email" aria-labelledby="email" aria-describedby="email_help" aria-required="true"/>
+              <span id="email_help" class="hidden">Entrez votre email</span>
           </div>
           <div class="input-group">
               <label for="message">Message</label>
-              <textarea id="message" name="message" aria-labelledby="message" aria-describedby="message input"></textarea>
+              <textarea id="message" name="message" aria-labelledby="message" aria-describedby="message_help"></textarea>
+              <span id="message_help" class="hidden">Entrez votre message</span>
           </div>
           <button class="contact_button" type="submit">Envoyer</button>
 				</form>

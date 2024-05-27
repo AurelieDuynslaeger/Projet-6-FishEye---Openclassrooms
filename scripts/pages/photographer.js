@@ -99,7 +99,7 @@ function displayPhotographerMedia(photographer, medias) {
             //si le média est une photo
             const img = document.createElement('img');
             img.src = `assets/media/${media.image}`;
-            img.alt = media.title;
+            img.alt = `picture named ${media.title}`;
             item.appendChild(img);
         } else if (media.video) {
             //si le média est une photo

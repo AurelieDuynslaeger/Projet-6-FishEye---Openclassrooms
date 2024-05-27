@@ -14,9 +14,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const photographer = photographers.photographers.find(photograph => photograph.id == idPhotograh);
 
         const header = document.querySelector('.modal_header');
-        const h2 = document.querySelector(".header_title");
-        h2.textContent = `Contactez-Moi ${photographer.name}`;
-        header.appendChild(h2);
+        const h2 = document.createElement('h2');
+        h2.classList.add("header_title");
+        h2.innerHTML = `Contactez-Moi <br> ${photographer.name}`;
+        header.insertBefore(h2, header.querySelector('.cross'));
 
     }
 });
