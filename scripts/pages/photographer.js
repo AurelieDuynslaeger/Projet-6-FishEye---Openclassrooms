@@ -128,25 +128,33 @@ function displayPhotographerMedia(medias) {
     section.innerHTML = '';
 
     //pour chaque média du photographe, on crée une div avec la class "gallery-item";
-    medias.forEach(media => {
+    medias.forEach((media, index) => {
         //utilisation de la factory pour le média
-        const mediaDisplay = new MediasFactory(media);
+        // const mediaDisplay = new MediasFactory(media);
         const itemGallery = document.createElement('div');
         itemGallery.classList.add('gallery-item');
+        const item = document.createElement('div');
+        item.classList.add('item');
 
         if (media.image) {
             //si le média est une photo
             const img = document.createElement('img');
             img.src = `assets/media/${media.image}`;
             img.alt = media.title;
-            itemGallery.appendChild(img);
+            item.appendChild(img);
         } else if (media.video) {
             //si le média est une photo
             const video = document.createElement('video');
             video.src = `assets/media/${media.video}`;
             video.controls = true;
-            itemGallery.appendChild(video);
+            item.appendChild(video);
         }
+
+        //écouteur d'événements pour ouvrir la lightbox sur l'item en cours (index)
+        item.addEventListener('click', () => {
+            openLightbox(index);
+        });
+
 
         //titre de l'item
         const itemTitle = document.createElement('h3');
@@ -182,6 +190,7 @@ function displayPhotographerMedia(medias) {
         spanrate.appendChild(likeIcon);
 
         itemLikes.appendChild(spanrate);
+        itemGallery.appendChild(item);
         itemGallery.appendChild(itemLikes);
         //gallery a pour enfant item entier
         section.appendChild(itemGallery);
@@ -219,18 +228,39 @@ function displayPhotographerMedia(medias) {
 
     rating.appendChild(totalLikes);
     rating.appendChild(price);
-
-
-
 }
+
+//lightbox
+function openLightbox(index) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    const media = currentMedias[index];
+
+    if (media.image) {
+        // Si c'est une image
+        lightboxImg.src = `assets/media/${media.image}`;
+    } else if (media.video) {
+        // Si c'est une vidéo
+        lightboxImg.innerHTML = `<video controls><source src="assets/media/${media.video}" type="video/mp4"></video>`;
+    }
+
+    lightbox.style.display = 'block';
+}
+
+function closeLightBox() {
+    const span = document.querySelector('.close');
+    span.addEventListener('clik', () => {
+        const lightBox = document.getElementById('lightBox');
+        lightBox.style.display = 'none';
+    })
+};
 
 //cibler le select
 const btn_select = document.getElementById("sortSelect");
 
 //écouteur d'event pour le changement de sélection
 sortSelect.addEventListener("change", handleSortChange);
-
-
 
 // gestion du changement de sélection
 function handleSortChange(event) {
