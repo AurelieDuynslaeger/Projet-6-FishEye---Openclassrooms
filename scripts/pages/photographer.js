@@ -1,5 +1,6 @@
 import { displayLightbox } from "../utils/lightbox.js";
 import { getPhotographers, getMedias } from '../utils/data.js';
+import MediasFactory from "../factories/MediasFactory.js";
 
 //récuperer l'id véhiculé dans l'url
 document.addEventListener("DOMContentLoaded", async () => {
@@ -90,25 +91,28 @@ function displayPhotographerMedia(photographer, medias) {
     //pour chaque média du photographe, on crée une div avec la class "gallery-item";
     medias.forEach((media, index) => {
         //utilisation de la factory pour le média
-        // const mediaDisplay = new MediasFactory(media);
+        const mediaItem = new MediasFactory(media);
         const itemGallery = document.createElement('div');
         itemGallery.classList.add('gallery-item');
         const item = document.createElement('div');
         item.classList.add('item');
 
-        if (media.image) {
-            //si le média est une photo
-            const img = document.createElement('img');
-            img.src = `assets/media/${media.image}`;
-            img.alt = `picture named ${media.title}`;
-            item.appendChild(img);
-        } else if (media.video) {
-            //si le média est une photo
-            const video = document.createElement('video');
-            video.src = `assets/media/${media.video}`;
-            video.controls = true;
-            item.appendChild(video);
-        }
+        //on utilise mediaContent pour insérer le média (img ou vidéo)
+        item.appendChild(mediaItem.mediaContent);
+
+        // if (media.image) {
+        //     //si le média est une photo
+        //     const img = document.createElement('img');
+        //     img.src = `assets/media/${media.image}`;
+        //     img.alt = `picture named ${media.title}`;
+        //     item.appendChild(img);
+        // } else if (media.video) {
+        //     //si le média est une photo
+        //     const video = document.createElement('video');
+        //     video.src = `assets/media/${media.video}`;
+        //     video.controls = true;
+        //     item.appendChild(video);
+        // }
 
         //écouteur d'événements pour ouvrir la lightbox sur l'item en cours (index)
         item.addEventListener('click', () => {

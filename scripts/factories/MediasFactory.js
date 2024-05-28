@@ -1,3 +1,5 @@
+import ImageMedia from '../models/ImageMedia.js'
+import VideoMedia from '../models/VideoMedia.js'
 class MediasFactory {
     constructor(data) {
         if (data.image) {
@@ -9,3 +11,5 @@ class MediasFactory {
         }
     }
 }
+
+export default MediasFactory;
