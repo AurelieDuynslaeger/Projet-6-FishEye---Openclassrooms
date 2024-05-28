@@ -200,7 +200,7 @@ function displayPhotographerMedia(photographer, medias) {
 
 
 //lightbox
-function openLightbox(index) {
+function openLightbox(photographer, index) {
     const media = currentMedias[index];
     displayLightbox(photographer, media);
 }
