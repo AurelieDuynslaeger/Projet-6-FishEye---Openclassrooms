@@ -54,17 +54,11 @@ export function displayLightbox({ photographer, medias }) {
             lightboxTitle.textContent = selectedMedia.title;
         }
     };
-    //passer au média suivant
-    const nextMedia = (selectedMedia) => {
-        currentIndex = (currentIndex + 1) % medias.length;
-        updateLightboxContent(selectedMedia);
-    };
 
-    //passer au média précédent
-    const previousMedia = (selectedMedia) => {
-        currentIndex = (currentIndex - 1 + medias.length) % medias.length;
-        updateLightboxContent(selectedMedia);
-    };
+    //on écoute les click sur les btn fermer, précédent, prochain
+    btnPrevious.addEventListener('click', () => previousMedia(medias[currentIndex]));
+    btnNext.addEventListener('click', () => nextMedia(medias[currentIndex]));
+    btnClose.addEventListener('click', closeLightbox);
 
     //défilement du carousel avec le clavier
     //on écoute les key up sur esacpe pour fermer, fleche gauche pour précédent média, et fleche droite pour prochain média
@@ -82,8 +76,25 @@ export function displayLightbox({ photographer, medias }) {
         }
     });
 
-    //on écoute les click sur les btn fermer, précédent, prochain
-    btnPrevious.addEventListener('click', () => previousMedia(medias[currentIndex]));
-    btnNext.addEventListener('click', () => nextMedia(medias[currentIndex]));
-    btnClose.addEventListener('click', closeLightbox);
+
 }
+
+
+
+//passer au média suivant
+function nextMedia(selectedMedia) {
+    const currentIndex = medias.findIndex(media => media.id === selectedMedia.id);
+    const nextIndex = (currentIndex + 1) % medias.length;
+    const nextMedia = medias[nextIndex];
+    updateLightboxContent(nextMedia);
+};
+
+//passer au média précédent
+function previousMedia(selectedMedia) {
+    const currentIndex = medias.findIndex(media => media.id === selectedMedia.id);
+    const previousIndex = (currentIndex - 1 + medias.length) % medias.length;
+    const previousMedia = medias[previousIndex];
+    updateLightboxContent(previousMedia);
+};
+
+
