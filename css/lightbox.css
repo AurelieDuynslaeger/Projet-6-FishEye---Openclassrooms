@@ -39,7 +39,7 @@
     cursor: pointer;
     transition: opacity 0.3s;
     color: #901C1C;
-    background-color: inherit;
+    background-color: transparent;
     border: none;
     font-size: 3.5rem;
 }
@@ -52,28 +52,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 90%;
-    width: 100%;
-    text-align: left;
+    justify-content: center;
+    height: auto;
+    width: 90%;
 }
 
 .lightbox_title{
-   margin: auto;
+    margin: auto;
     width: 80%;
     color: #901C1C;
     margin-top: 1rem;
     font-weight: 200;
+    text-align: center;
 }
 
 .lightbox_media{
-    height: 100%;
-    margin: auto;
+    display: flex;
+    justify-content: center;
+    /* width: 90%; */
+    height: 90%;
 }
 
 .lightbox_media img, 
 .lightbox_media video{
-    height: 100%;
-    border-radius: 10px;
+    width: 90%;
+    object-fit: contain;
+    height: auto;
 }
 
 

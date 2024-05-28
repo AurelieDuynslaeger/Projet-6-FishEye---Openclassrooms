@@ -1,48 +1,47 @@
 import MediasFactory from "../factories/MediasFactory.js";
-import { getMediaById } from "../factories/MediasFactory.js";
 
 export function displayLightbox({ photographer, medias }) {
-    //on cible les divers elements du dom pour la lighbox
+    // On cible les divers éléments du DOM pour la lightbox
     const lightbox = document.querySelector('.lightbox');
     const lightboxMedia = document.querySelector('.lightbox_media');
     const lightboxTitle = document.querySelector('.lightbox_title');
     const btnClose = document.querySelector('.lightbox_close');
     const btnPrevious = document.querySelector('.lightbox_prev');
     const btnNext = document.querySelector('.lightbox_next');
-    //le media provider reste gallery-item sur lequel l'utilisateur poourra clicker
-    const mediaProvider = Array.from(document.querySelectorAll('.item'));
-    console.log(mediaProvider);
+    const mediaProvider = Array.from(document.querySelectorAll('.gallery-item .item'));
 
-    //on écoute le clik sur les items de gallery item
-    mediaProvider.forEach((media) => {
+    let currentIndex = null;
+
+    // On écoute le clic sur les items de gallery item
+    mediaProvider.forEach((media, index) => {
         media.addEventListener('click', () => {
             const mediaId = media.getAttribute('data-media');
-            openLightbox(mediaId);
-            console.log(mediaId);
+            currentIndex = medias.findIndex(media => media.id == mediaId);
+            openLightbox(currentIndex);
         });
     });
 
-    //ouverture de la lightbox
-    const openLightbox = (mediaId) => {
+    // Ouverture de la lightbox
+    const openLightbox = (index) => {
         lightbox.style.display = 'flex';
-        //on empeche le défilement de la page quand la lightbox est ouverte
+        // On empêche le défilement de la page quand la lightbox est ouverte
         document.body.style.overflow = 'hidden';
-        //on met le focux sur le bouton de fermeture
+        // On met le focus sur le bouton de fermeture
         btnClose.focus();
-        updateLightboxContent(mediaId)
+        updateLightboxContent(index);
     };
 
-    //fermture de la lightbox
+    // Fermeture de la lightbox
     const closeLightbox = () => {
-        //au clik sur la X on passe la lightbox en display non
+        // Au clic sur la X on passe la lightbox en display none
         lightbox.style.display = 'none';
-        //on rétablit le défilement de la page
+        // On rétablit le défilement de la page
         document.body.style.overflow = '';
     };
 
-    //mise à jour du contenu de la lightbox
-    const updateLightboxContent = (mediaId) => {
-        const selectedMedia = medias.find(media => media.id == mediaId);
+    // Mise à jour du contenu de la lightbox
+    const updateLightboxContent = (index) => {
+        const selectedMedia = medias[index];
         if (selectedMedia) {
             // Afficher le contenu du média dans la lightbox en fonction de son type (image ou vidéo)
             if (selectedMedia.image) {
@@ -52,17 +51,30 @@ export function displayLightbox({ photographer, medias }) {
             }
             // Mettre à jour le titre de la lightbox avec le titre du média
             lightboxTitle.textContent = selectedMedia.title;
+            currentIndex = index;
         }
     };
 
-    //on écoute les click sur les btn fermer, précédent, prochain
-    btnPrevious.addEventListener('click', () => previousMedia(medias[currentIndex]));
-    btnNext.addEventListener('click', () => nextMedia(medias[currentIndex]));
+    // Passer au média suivant
+    const nextMedia = () => {
+        currentIndex = (currentIndex + 1) % medias.length;
+        updateLightboxContent(currentIndex);
+    };
+
+    // Passer au média précédent
+    const previousMedia = () => {
+        currentIndex = (currentIndex - 1 + medias.length) % medias.length;
+        updateLightboxContent(currentIndex);
+    };
+
+    // On écoute les clics sur les boutons fermer, précédent, prochain
+    btnPrevious.addEventListener('click', previousMedia);
+    btnNext.addEventListener('click', nextMedia);
     btnClose.addEventListener('click', closeLightbox);
 
-    //défilement du carousel avec le clavier
-    //on écoute les key up sur esacpe pour fermer, fleche gauche pour précédent média, et fleche droite pour prochain média
-    document.addEventListener('keyup', e => {
+    // Défilement du carousel avec le clavier
+    // On écoute les keyup sur Escape pour fermer, flèche gauche pour précédent média, et flèche droite pour prochain média
+    document.addEventListener('keyup', (e) => {
         switch (e.key) {
             case 'Escape':
                 closeLightbox();
@@ -75,26 +87,4 @@ export function displayLightbox({ photographer, medias }) {
                 break;
         }
     });
-
-
 }
-
-
-
-//passer au média suivant
-function nextMedia(selectedMedia) {
-    const currentIndex = medias.findIndex(media => media.id === selectedMedia.id);
-    const nextIndex = (currentIndex + 1) % medias.length;
-    const nextMedia = medias[nextIndex];
-    updateLightboxContent(nextMedia);
-};
-
-//passer au média précédent
-function previousMedia(selectedMedia) {
-    const currentIndex = medias.findIndex(media => media.id === selectedMedia.id);
-    const previousIndex = (currentIndex - 1 + medias.length) % medias.length;
-    const previousMedia = medias[previousIndex];
-    updateLightboxContent(previousMedia);
-};
-
-
