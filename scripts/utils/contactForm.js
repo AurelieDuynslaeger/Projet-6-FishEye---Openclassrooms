@@ -18,8 +18,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         h2.classList.add("header_title");
         h2.innerHTML = `Contactez-Moi <br> ${photographer.name}`;
         header.insertBefore(h2, header.querySelector('.cross'));
-
     }
+
+    //écouteur d'event sur le formulaire
+    const form = document.querySelector("#contact_modal form");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        //récup des données saisies sur le formulaire
+        const prenom = document.getElementById('prenom').value;
+        const nom = document.getElementById('nom').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        //Affichage des valeurs dans la console
+        console.log(`Prénom: ${prenom}`);
+        console.log(`Nom: ${nom}`);
+        console.log(`Email: ${email}`);
+        console.log(`Message: ${message}`);
+
+    })
 });
 
 
