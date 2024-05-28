@@ -1,3 +1,6 @@
+import MediasFactory from "../factories/MediasFactory.js";
+import { getMediaById } from "../factories/MediasFactory.js";
+
 export function displayLightbox({ photographer, medias }) {
     //on cible les divers elements du dom pour la lighbox
     const lightbox = document.querySelector('.lightbox');
@@ -7,29 +10,26 @@ export function displayLightbox({ photographer, medias }) {
     const btnPrevious = document.querySelector('.lightbox_prev');
     const btnNext = document.querySelector('.lightbox_next');
     //le media provider reste gallery-item sur lequel l'utilisateur poourra clicker
-    const mediaProvider = Array.from(document.querySelectorAll('.gallery-item'));
+    const mediaProvider = Array.from(document.querySelectorAll('.item'));
+    console.log(mediaProvider);
 
-    //index que l'on assigne à 0 (qui sera utilisé pour next ou prev)
-    let currentIndex = 0;
-
-    //pour chaque média de on ecoute le clik
-    mediaProvider.forEach((media, index) => {
+    //on écoute le clik sur les items de gallery item
+    mediaProvider.forEach((media) => {
         media.addEventListener('click', () => {
-            currentIndex = index;
-            //au clik on ouvre la light box
-            openLightbox();
-            //on met à jour le contenu de la lightbox
-            updateLightboxContent();
+            const mediaId = media.getAttribute('data-media');
+            openLightbox(mediaId);
+            console.log(mediaId);
         });
     });
 
     //ouverture de la lightbox
-    const openLightbox = () => {
+    const openLightbox = (mediaId) => {
         lightbox.style.display = 'flex';
         //on empeche le défilement de la page quand la lightbox est ouverte
         document.body.style.overflow = 'hidden';
         //on met le focux sur le bouton de fermeture
         btnClose.focus();
+        updateLightboxContent(mediaId)
     };
 
     //fermture de la lightbox
@@ -41,32 +41,29 @@ export function displayLightbox({ photographer, medias }) {
     };
 
     //mise à jour du contenu de la lightbox
-    const updateLightboxContent = () => {
-        const media = medias[currentIndex];
-        if (media && (media.image || media.video)) { // 
-            if (media.image) {
-                lightboxMedia.innerHTML = `<img src="assets/media/${media.image}" alt="${media.title}">`;
-            } else if (media.video) {
-                lightboxMedia.innerHTML = `<video controls><source src="assets/media/${media.video}" type="video/mp4"></video>`;
+    const updateLightboxContent = (mediaId) => {
+        const selectedMedia = medias.find(media => media.id == mediaId);
+        if (selectedMedia) {
+            // Afficher le contenu du média dans la lightbox en fonction de son type (image ou vidéo)
+            if (selectedMedia.image) {
+                lightboxMedia.innerHTML = `<img src="assets/media/${selectedMedia.image}" alt="${selectedMedia.title}">`;
+            } else if (selectedMedia.video) {
+                lightboxMedia.innerHTML = `<video controls><source src="assets/media/${selectedMedia.video}" type="video/mp4"></video>`;
             }
-            lightboxTitle.textContent = `${media.title}`;
-        } else {
-            console.error("Le média actuel est invalide ou ne contient pas de contenu image ou vidéo.");
+            // Mettre à jour le titre de la lightbox avec le titre du média
+            lightboxTitle.textContent = selectedMedia.title;
         }
     };
-
     //passer au média suivant
-    const nextMedia = () => {
+    const nextMedia = (selectedMedia) => {
         currentIndex = (currentIndex + 1) % medias.length;
-        //mise à jour du contenu
-        updateLightboxContent();
+        updateLightboxContent(selectedMedia);
     };
 
     //passer au média précédent
-    const previousMedia = () => {
+    const previousMedia = (selectedMedia) => {
         currentIndex = (currentIndex - 1 + medias.length) % medias.length;
-        //mise à jour du contenu 
-        updateLightboxContent();
+        updateLightboxContent(selectedMedia);
     };
 
     //défilement du carousel avec le clavier
@@ -86,7 +83,7 @@ export function displayLightbox({ photographer, medias }) {
     });
 
     //on écoute les click sur les btn fermer, précédent, prochain
-    btnPrevious.addEventListener('click', previousMedia);
-    btnNext.addEventListener('click', nextMedia);
+    btnPrevious.addEventListener('click', () => previousMedia(medias[currentIndex]));
+    btnNext.addEventListener('click', () => nextMedia(medias[currentIndex]));
     btnClose.addEventListener('click', closeLightbox);
 }

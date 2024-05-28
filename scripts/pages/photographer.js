@@ -94,8 +94,10 @@ function displayPhotographerMedia(photographer, medias) {
         const mediaItem = new MediasFactory(media);
         const itemGallery = document.createElement('div');
         itemGallery.classList.add('gallery-item');
+
         const item = document.createElement('div');
         item.classList.add('item');
+        item.setAttribute('data-media', media.id);
 
         //on utilise mediaContent pour insérer le média (img ou vidéo)
         item.appendChild(mediaItem.mediaContent);

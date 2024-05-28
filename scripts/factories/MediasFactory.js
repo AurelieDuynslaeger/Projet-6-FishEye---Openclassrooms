@@ -12,4 +12,14 @@ class MediasFactory {
     }
 }
 
+export function getMediaById(mediaId, medias) {
+    if (medias) {
+        return medias.find(media => media.id === mediaId);
+    } else {
+        console.error("Le tableau de médias est vide ou non défini.");
+        return null;
+    }
+}
+
+
 export default MediasFactory;
