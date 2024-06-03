@@ -2,6 +2,9 @@ import { displayLightbox } from "../utils/lightbox.js";
 import { getPhotographers, getMedias } from '../utils/data.js';
 import MediasFactory from "../factories/MediasFactory.js";
 
+// Variable pour stocker les informations du photographe
+let currentPhotographer = null;
+
 //récuperer l'id véhiculé dans l'url
 document.addEventListener("DOMContentLoaded", async () => {
     //on vient regarder dans l'url le param id
@@ -20,6 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         //si le photographe est trouvé
         if (photographer) {
             console.log(photographer);
+            currentPhotographer = photographer; // Stocke les infos du photographe
             displayPhotographerData(photographer);
             const { medias } = await getMedias();
             const photographerMedias = medias.filter(media => media.photographerId == idPhotograh);
@@ -229,11 +233,11 @@ function handleSortChange(event) {
 //tri popularité
 function sortByPopularity() {
     currentMedias.sort((a, b) => b.likes - a.likes);
-    displayPhotographerMedia(currentMedias);
+    displayPhotographerMedia(currentPhotographer, currentMedias);
 }
 
 //tri titre
 function sortByTitle() {
     currentMedias.sort((a, b) => a.title.localeCompare(b.title));
-    displayPhotographerMedia(currentMedias);
+    displayPhotographerMedia(currentPhotographer, currentMedias);
 }
