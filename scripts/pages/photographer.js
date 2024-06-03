@@ -1,5 +1,6 @@
 import { displayLightbox } from "../utils/lightbox.js";
 import { getPhotographers, getMedias } from '../utils/data.js';
+import { sortByPopularity, sortByTitle, handleSortChange } from '../utils/sort.js';
 import MediasFactory from "../factories/MediasFactory.js";
 
 // Variable pour stocker les informations du photographe
@@ -215,29 +216,6 @@ function openLightbox(photographer, index) {
 const sortSelect = document.getElementById("sortSelect");
 
 //écouteur d'event pour le changement de sélection
-sortSelect.addEventListener("change", handleSortChange);
+sortSelect.addEventListener("change", (event) => handleSortChange(event, currentPhotographer, currentMedias, displayPhotographerMedia));
 
-// gestion du changement de sélection
-function handleSortChange(event) {
-    //on stock la valeur selectionnée
-    const selectedOption = event.target.value;
 
-    //vérif quelle option est choisie et effectuer le tri
-    if (selectedOption === "popularity") {
-        sortByPopularity();
-    } else if (selectedOption === "title") {
-        sortByTitle();
-    }
-}
-
-//tri popularité
-function sortByPopularity() {
-    currentMedias.sort((a, b) => b.likes - a.likes);
-    displayPhotographerMedia(currentPhotographer, currentMedias);
-}
-
-//tri titre
-function sortByTitle() {
-    currentMedias.sort((a, b) => a.title.localeCompare(b.title));
-    displayPhotographerMedia(currentPhotographer, currentMedias);
-}
