@@ -72,6 +72,9 @@ function displayModal() {
     const body = document.body;
     body.classList.add('no-scroll');
     modal.style.display = "block";
+    const firstInput = modal.querySelector('input');
+    //on met le focus sur le premier input
+    firstInput.focus();
 }
 
 function closeModal() {

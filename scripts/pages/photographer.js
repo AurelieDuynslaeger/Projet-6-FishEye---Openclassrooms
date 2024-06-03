@@ -1,6 +1,6 @@
 import { displayLightbox } from "../utils/lightbox.js";
 import { getPhotographers, getMedias } from '../utils/data.js';
-import { sortByPopularity, sortByTitle, handleSortChange } from '../utils/sort.js';
+import { handleSortChange } from '../utils/sort.js';
 import MediasFactory from "../factories/MediasFactory.js";
 
 // Variable pour stocker les informations du photographe
@@ -75,8 +75,6 @@ function displayPhotographerData(photographer) {
     // header.appendChild(identityInfo);
     header.appendChild(picture);
 }
-
-
 
 
 //contenu affiché selon le tri ou non
