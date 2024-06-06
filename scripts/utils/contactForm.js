@@ -1,9 +1,14 @@
+import { getPhotographers } from '../utils/data.js';
+
 document.addEventListener("DOMContentLoaded", async () => {
     //on vient regarder dans l'url le param id
     const paramUrl = new URLSearchParams(window.location.search);
     console.log(paramUrl);
     const idPhotograh = paramUrl.get('id');
     console.log(idPhotograh);
+
+    const contactModal = document.getElementById("contact_button");
+    contactModal.addEventListener('click', displayModal);
 
     //si un id est trouvé
     if (idPhotograh) {
@@ -35,33 +40,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.log(`Nom: ${nom}`);
         console.log(`Email: ${email}`);
         console.log(`Message: ${message}`);
+        closeModal();
 
     })
 });
 
-
-//récupération de tous les photographes
-async function getPhotographers() {
-    try {
-        // fetch vers le fichier json
-        const fetchPhotographers = await fetch("data/photographers.json");
-        //si autre réponse que 200 alors afficher l'erreur
-        if (!fetchPhotographers.ok) {
-            throw new Error('Erreur récup data')
-        }
-        //sinon on stocke le fetch dans data et objet js
-        const data = await fetchPhotographers.json();
-        return {
-            //on attribue à photographers, ce que l'on récupère dans data
-            photographers: data.photographers
-        };
-    } catch (error) {
-        console.error("Erreur: ", error);
-        return {
-            photographers: []
-        };
-    }
+function closeModal() {
+    const main = document.getElementById('main');
+    main.setAttribute('aria-hidden', 'false');
+    const modal = document.getElementById("contact_modal");
+    modal.setAttribute('aria-hidden', 'true');
+    modal.style.display = "none";
+    const body = document.body;
+    body.classList.remove('no-scroll');
 }
+
 
 
 function displayModal() {
@@ -77,12 +70,4 @@ function displayModal() {
     firstInput.focus();
 }
 
-function closeModal() {
-    const main = document.getElementById('main');
-    main.setAttribute('aria-hidden', 'false');
-    const modal = document.getElementById("contact_modal");
-    modal.setAttribute('aria-hidden', 'true');
-    modal.style.display = "none";
-    const body = document.body;
-    body.classList.remove('no-scroll');
-}
+
