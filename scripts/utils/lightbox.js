@@ -1,6 +1,5 @@
-import MediasFactory from "../factories/MediasFactory.js";
 
-export function displayLightbox({ photographer, medias }) {
+export function displayLightbox({ medias }) {
     // On cible les divers éléments du DOM pour la lightbox
     const lightbox = document.querySelector('.lightbox');
     const lightboxMedia = document.querySelector('.lightbox_media');
@@ -13,7 +12,7 @@ export function displayLightbox({ photographer, medias }) {
     let currentIndex = null;
 
     // On écoute le clic sur les items de gallery item
-    mediaProvider.forEach((media, index) => {
+    mediaProvider.forEach((media) => {
         media.addEventListener('click', () => {
             const mediaId = media.getAttribute('data-media');
             currentIndex = medias.findIndex(media => media.id == mediaId);

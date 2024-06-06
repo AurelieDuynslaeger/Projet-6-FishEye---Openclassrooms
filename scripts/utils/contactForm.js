@@ -56,7 +56,7 @@ async function getPhotographers() {
             photographers: data.photographers
         };
     } catch (error) {
-        console.error("Erreur: ".error);
+        console.error("Erreur: ", error);
         return {
             photographers: []
         };

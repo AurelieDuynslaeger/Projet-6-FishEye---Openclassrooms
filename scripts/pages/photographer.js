@@ -92,7 +92,7 @@ function displayPhotographerMedia(photographer, medias) {
     section.innerHTML = '';
 
     //pour chaque média du photographe, on crée une div avec la class "gallery-item";
-    medias.forEach((media, index) => {
+    medias.forEach((media) => {
         //utilisation de la factory pour le média
         const mediaItem = new MediasFactory(media);
         const itemGallery = document.createElement('div');
@@ -118,11 +118,6 @@ function displayPhotographerMedia(photographer, medias) {
         //     video.controls = true;
         //     item.appendChild(video);
         // }
-
-        //écouteur d'événements pour ouvrir la lightbox sur l'item en cours (index)
-        item.addEventListener('click', () => {
-            openLightbox(index);
-        });
 
 
         //titre de l'item
@@ -200,14 +195,7 @@ function displayPhotographerMedia(photographer, medias) {
     rating.appendChild(totalLikes);
     rating.appendChild(price);
 
-    displayLightbox({ photographer, medias });
-}
-
-
-//lightbox
-function openLightbox(photographer, index) {
-    const media = currentMedias[index];
-    displayLightbox(photographer, media);
+    displayLightbox({ medias });
 }
 
 //cibler le select
