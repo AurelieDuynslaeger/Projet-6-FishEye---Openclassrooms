@@ -80,6 +80,7 @@ function displayPhotographerData(photographer) {
 //contenu affiché selon le tri ou non
 let currentMedias = [];
 
+
 //affichage des média d'un photographe par l'id
 function displayPhotographerMedia(photographer, medias) {
     //on stocke par défaut les médias récup dans le fetch,
@@ -105,21 +106,6 @@ function displayPhotographerMedia(photographer, medias) {
         //on utilise mediaContent pour insérer le média (img ou vidéo)
         item.appendChild(mediaItem.mediaContent);
 
-        // if (media.image) {
-        //     //si le média est une photo
-        //     const img = document.createElement('img');
-        //     img.src = `assets/media/${media.image}`;
-        //     img.alt = `picture named ${media.title}`;
-        //     item.appendChild(img);
-        // } else if (media.video) {
-        //     //si le média est une photo
-        //     const video = document.createElement('video');
-        //     video.src = `assets/media/${media.video}`;
-        //     video.controls = true;
-        //     item.appendChild(video);
-        // }
-
-
         //titre de l'item
         const itemTitle = document.createElement('h3');
         itemTitle.textContent = media.title;
@@ -132,7 +118,7 @@ function displayPhotographerMedia(photographer, medias) {
         const likeIcon = document.createElement('img');
         likeIcon.classList.add('heart-icon');
         //icon Coeur pour les likes
-        likeIcon.src = 'assets/icons/heart.svg';
+        likeIcon.src = 'assets/icons/heart-item.svg';
         likeIcon.alt = 'Likes';
         //compte des likes
         const likesCount = document.createElement('span');
@@ -140,15 +126,23 @@ function displayPhotographerMedia(photographer, medias) {
         likesCount.classList.add('likes-count');
         itemLikes.appendChild(itemTitle);
 
+        //empêcher les likes multiples
+        let likedMediaIds = [];
+
         //écouteur d'évenement sur l'icone pr le compteur de likes qui s'incrémente : 
         likeIcon.addEventListener('click', () => {
-            //on récup d'abord le nombre de likes actuel
-            const likesCount = itemGallery.querySelector(".likes-count");
-            let actualLikes = parseInt(likesCount.textContent);//valeur de likesCount
-            actualLikes++; //mise à jour au clik du compteur
+            // Vérifier si le média a déjà été liké
+            if (!likedMediaIds.includes(media.id)) {
+                // Mettre à jour le compteur de likes
+                const likesCount = itemGallery.querySelector(".likes-count");
+                let actualLikes = parseInt(likesCount.textContent);
+                actualLikes++;
+                likesCount.textContent = actualLikes;
 
-            likesCount.textContent = actualLikes; //affichage mis à jour
-        })
+                // Ajouter l'identifiant du média à la liste des médias likés
+                likedMediaIds.push(media.id);
+            }
+        });
 
         //gallery item a pour enfant titre et likes
         spanrate.appendChild(likesCount);
@@ -169,6 +163,7 @@ function displayPhotographerMedia(photographer, medias) {
         sumLikes += media.likes;
     });
 
+
     //div fixée pour afficher le nb total de likes et prix du photographe
     const rating = document.querySelector('.photographer-rating');
 
@@ -179,10 +174,11 @@ function displayPhotographerMedia(photographer, medias) {
     console.log(sumLikes);
     ratingLikes.innerText = sumLikes; //ici il y aurait le véritable nb de likes (logique à implémenter)
 
+
     const likeIcon = document.createElement('img');
     likeIcon.classList.add('heart-icon');
     //icon Coeur pour les likes totaux
-    likeIcon.src = 'assets/icons/heart.svg';
+    likeIcon.src = 'assets/icons/heart-total.svg';
     likeIcon.alt = 'Likes';
 
     const price = document.createElement('p');
@@ -197,6 +193,9 @@ function displayPhotographerMedia(photographer, medias) {
 
     displayLightbox({ medias });
 }
+
+
+
 
 //cibler le select
 const sortSelect = document.getElementById("sortSelect");
