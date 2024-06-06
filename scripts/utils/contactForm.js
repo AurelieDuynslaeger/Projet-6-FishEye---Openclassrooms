@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const contactModal = document.getElementById("contact_button");
     contactModal.addEventListener('click', displayModal);
 
+    const crossModal = document.getElementById("cross-close");
+    crossModal.addEventListener('click', closeModal);
+
     //si un id est trouvé
     if (idPhotograh) {
         //on lance le fetch photographers
