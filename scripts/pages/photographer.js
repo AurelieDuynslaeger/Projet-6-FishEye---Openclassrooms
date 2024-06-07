@@ -77,10 +77,8 @@ function displayPhotographerData(photographer) {
     header.appendChild(picture);
 }
 
-
 //contenu affiché selon le tri ou non
 let currentMedias = [];
-
 
 //affichage des média d'un photographe par l'id
 function displayPhotographerMedia(photographer, medias) {
@@ -130,7 +128,6 @@ function displayPhotographerMedia(photographer, medias) {
         //empêcher les likes multiples
         let likedMediaIds = [];
 
-        //écouteur d'évenement sur l'icone pr le compteur de likes qui s'incrémente : 
         //écouteur d'événement sur l'icône pour le compteur de likes qui s'incrémente : 
         likeIcon.addEventListener('click', () => {
             // Vérifier si le média a déjà été liké
@@ -141,6 +138,7 @@ function displayPhotographerMedia(photographer, medias) {
 
                 // Ajouter l'identifiant du média à la liste des médias likés
                 likedMediaIds.push(media.id);
+                //mise à jour du total des likes
                 updateTotalLikes(medias);
             }
         });

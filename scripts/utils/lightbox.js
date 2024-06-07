@@ -13,10 +13,20 @@ export function displayLightbox({ medias }) {
 
     // On écoute le clic sur les items de gallery item
     mediaProvider.forEach((media) => {
+        // Ajout d'un écouteur d'événement au clik
         media.addEventListener('click', () => {
             const mediaId = media.getAttribute('data-media');
             currentIndex = medias.findIndex(media => media.id == mediaId);
             openLightbox(currentIndex);
+        });
+
+        // Ajout d'un écouteur d'événement pour le clavier
+        media.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const mediaId = media.getAttribute('data-media');
+                currentIndex = medias.findIndex(media => media.id == mediaId);
+                openLightbox(currentIndex);
+            }
         });
     });
 

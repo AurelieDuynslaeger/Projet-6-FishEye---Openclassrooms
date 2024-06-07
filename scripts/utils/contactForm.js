@@ -65,8 +65,6 @@ function closeModal() {
     body.classList.remove('no-scroll');
 }
 
-
-
 function displayModal() {
     const main = document.getElementById('main');
     main.setAttribute('aria-hidden', 'true');
