@@ -54,13 +54,15 @@ export function photographerTemplate(data) {
         return (article);
     }
 
-    // Fonction pour calculer le nombre total de likes
-    function getTotalLikes(medias) {
-        let totalLikes = 0;
-        medias.forEach(media => {
-            totalLikes += media.likes;
-        });
-        return totalLikes;
-    }
-    return { name, picture, getUserCardDOM, getTotalLikes }
+
+    return { name, picture, getUserCardDOM }
+}
+
+// Fonction pour calculer le nombre total de likes
+export function getTotalLikes(medias) {
+    let totalLikes = 0;
+    medias.forEach(media => {
+        totalLikes += media.likes;
+    });
+    return totalLikes;
 }

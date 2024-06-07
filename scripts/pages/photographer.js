@@ -141,6 +141,7 @@ function displayPhotographerMedia(photographer, medias) {
 
                 // Ajouter l'identifiant du média à la liste des médias likés
                 likedMediaIds.push(media.id);
+                updateTotalLikes(medias);
             }
         });
 
@@ -155,44 +156,47 @@ function displayPhotographerMedia(photographer, medias) {
         section.appendChild(itemGallery);
     });
 
-    // Calcul du total des likes
-    //inital à 0
-    //pour chaque media, on ajoute le nb de likes à sumLikes
-    let sumLikes = 0;
-    medias.forEach(media => {
-        sumLikes += media.likes;
-    });
+    //on initialise le total des likes actuel
+    initializeTotalLikes(photographer, medias);
+    displayLightbox({ medias });
+}
 
-
-    //div fixée pour afficher le nb total de likes et prix du photographe
+// Fonction pour initialiser le content de la div des likes
+function initializeTotalLikes(photographer, medias) {
+    let sumLikes = getTotalLikes(medias);
     const rating = document.querySelector('.photographer-rating');
 
     const totalLikes = document.createElement('div');
     totalLikes.classList.add('rating');
-
     const ratingLikes = document.createElement("p");
+    ratingLikes.id = "total-likes";
     console.log(sumLikes);
     ratingLikes.textContent = sumLikes;
 
-
     const likeIcon = document.createElement('img');
     likeIcon.classList.add('heart-icon');
-    //icon Coeur pour les likes totaux
     likeIcon.src = 'assets/icons/heart-total.svg';
     likeIcon.alt = 'Likes';
 
     const price = document.createElement('p');
     price.textContent = `${photographer.price} € / jour`;
 
-
     totalLikes.appendChild(ratingLikes);
     totalLikes.appendChild(likeIcon);
 
+    rating.innerHTML = ''; // Réinitialiser le contenu
     rating.appendChild(totalLikes);
     rating.appendChild(price);
-
-    displayLightbox({ medias });
 }
+
+// Fonction pour mettre à jour uniquement le total des likes
+function updateTotalLikes(medias) {
+    let sumLikes = getTotalLikes(medias);
+    const ratingLikes = document.getElementById('total-likes');
+    console.log(sumLikes);
+    ratingLikes.textContent = sumLikes;
+}
+
 
 //cibler le select
 const sortSelect = document.getElementById("sortSelect");
