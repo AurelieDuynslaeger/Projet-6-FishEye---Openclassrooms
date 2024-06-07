@@ -13,6 +13,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const crossModal = document.getElementById("cross-close");
     crossModal.addEventListener('click', closeModal);
 
+    // Ajouter l'écouteur d'événements pour la touche "Escape"
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
+
     //si un id est trouvé
     if (idPhotograh) {
         //on lance le fetch photographers

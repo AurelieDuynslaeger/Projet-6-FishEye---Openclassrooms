@@ -2,6 +2,7 @@ import { displayLightbox } from "../utils/lightbox.js";
 import { getPhotographers, getMedias } from '../utils/data.js';
 import { handleSortChange } from '../utils/sort.js';
 import MediasFactory from "../factories/MediasFactory.js";
+import { getTotalLikes } from "../templates/photographer.js"
 
 // Variable pour stocker les informations du photographe
 let currentPhotographer = null;
@@ -130,14 +131,13 @@ function displayPhotographerMedia(photographer, medias) {
         let likedMediaIds = [];
 
         //écouteur d'évenement sur l'icone pr le compteur de likes qui s'incrémente : 
+        //écouteur d'événement sur l'icône pour le compteur de likes qui s'incrémente : 
         likeIcon.addEventListener('click', () => {
             // Vérifier si le média a déjà été liké
             if (!likedMediaIds.includes(media.id)) {
                 // Mettre à jour le compteur de likes
-                const likesCount = itemGallery.querySelector(".likes-count");
-                let actualLikes = parseInt(likesCount.textContent);
-                actualLikes++;
-                likesCount.textContent = actualLikes;
+                media.likes++;
+                likesCount.textContent = media.likes;
 
                 // Ajouter l'identifiant du média à la liste des médias likés
                 likedMediaIds.push(media.id);
@@ -172,7 +172,7 @@ function displayPhotographerMedia(photographer, medias) {
 
     const ratingLikes = document.createElement("p");
     console.log(sumLikes);
-    ratingLikes.innerText = sumLikes; //ici il y aurait le véritable nb de likes (logique à implémenter)
+    ratingLikes.textContent = sumLikes;
 
 
     const likeIcon = document.createElement('img');
@@ -193,9 +193,6 @@ function displayPhotographerMedia(photographer, medias) {
 
     displayLightbox({ medias });
 }
-
-
-
 
 //cibler le select
 const sortSelect = document.getElementById("sortSelect");

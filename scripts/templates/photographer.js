@@ -9,6 +9,9 @@ export function photographerTemplate(data) {
     //lien qui nous emmène vers le profile du photographe où on véhicule l'id
     const link = `photographer.html?id=${id}`;
 
+    // Total des likes initialisé à zéro
+    let totalLikes = 0;
+
 
     function getUserCardDOM() {
         const article = document.createElement('article');
@@ -37,6 +40,11 @@ export function photographerTemplate(data) {
         const span = document.createElement('span');
         span.textContent = `${price}€/jour`;
 
+        // Affichage du total des likes
+        const totalLikesDisplay = document.createElement('span');
+        totalLikesDisplay.textContent = totalLikes; // Initialisation à zéro
+        totalLikesDisplay.classList.add('total-likes'); // Ajout de classe pour le cibler
+
         //enfants de article a (img et h2) + h3, p, span
         article.appendChild(profileLink);
         article.appendChild(h3);
@@ -45,5 +53,14 @@ export function photographerTemplate(data) {
 
         return (article);
     }
-    return { name, picture, getUserCardDOM }
+
+    // Fonction pour calculer le nombre total de likes
+    function getTotalLikes(medias) {
+        let totalLikes = 0;
+        medias.forEach(media => {
+            totalLikes += media.likes;
+        });
+        return totalLikes;
+    }
+    return { name, picture, getUserCardDOM, getTotalLikes }
 }
