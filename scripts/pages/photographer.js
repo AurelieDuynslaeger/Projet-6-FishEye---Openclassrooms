@@ -3,7 +3,6 @@ import { getPhotographers, getMedias } from '../utils/data.js';
 import { handleSortChange } from '../utils/sort.js';
 import { initializeTotalLikes, updateTotalLikes } from "../utils/likes.js";
 
-import { getTotalLikes } from "../templates/photographer.js"
 import { bannerPhotographer } from "../templates/bannerPhotographer.js";
 import { mediaItemPhotographer } from "../templates/mediaItemPhotographer.js";
 
@@ -30,10 +29,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         //si le photographe est trouvé
         if (photographer) {
             currentPhotographer = photographer;
+            //on affiche le banner du photographe
             bannerPhotographer(currentPhotographer);
             const { medias } = await getMedias();
             const photographerMedias = medias.filter(media => media.photographerId == idPhotograh);
-
+            //on affiche sa gallerie de médias
             displayPhotographerMedia(photographer, photographerMedias);
         } else {
             console.error("Photographe inconnu")
@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-//affichage des média d'un photographe par l'id
 // Fonction pour afficher les médias d'un photographe
 function displayPhotographerMedia(photographer, medias) {
     currentMedias = medias;
