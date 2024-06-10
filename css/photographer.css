@@ -1,4 +1,4 @@
-@import url("lightbox.css");
+@import url("./lightbox.css");
 
 #main {
     display: flex;
@@ -233,15 +233,3 @@ form input{
     width: 1px;
  }
 
-
- @media (max-width: 768px) {
-    .photograph-header {
-        display: block;
-    }
-    .photographer-info h1{
-        font-size: 30px;
-    }
-    .gallery-item{
-        flex-basis: 50%;
-     }  
-}
