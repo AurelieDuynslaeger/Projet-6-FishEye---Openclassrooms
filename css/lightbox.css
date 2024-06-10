@@ -85,5 +85,14 @@
 
 
 @media screen and (max-width:768px){
-   
+    .lightbox_prev {
+        right: auto;
+        left: 0.8rem;
+    }
+    .lightbox_next {
+        right: 0.8rem;
+    }
+    #lightbox_container{
+        width: 80%;
+    }
 }
