@@ -35,8 +35,6 @@
     margin: 0;
 }
 
-
-
 .photographer-info h2{
     color: #901C1C;
     font-weight: 200;
@@ -110,8 +108,6 @@
     display: flex;
     align-items: center;
 }
-
-
 
 .photographer-rating{
     display: flex;
@@ -233,3 +229,72 @@ form input{
     width: 1px;
  }
 
+
+ @media screen and (max-width:768px){
+    .photograph-header {
+        margin: 0 50px;
+        position: relative;
+        height: 150px;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .photograph-header img{
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        top: -1rem;
+        left: -1rem;
+    }
+    .photographer-info h1{
+        font-size: 25px;
+    }
+    .photographer-info h2{
+        font-size: 16px;
+    }
+    
+    .photographer-info p{
+        font-size: 10px;
+    }
+    .contact_button {
+        font-size: 10px;
+        padding: 5px;
+        width: 80px;
+        height: 35px;
+    }
+    .photograph-work{
+        margin: 15px 50px
+    }
+    .photograph-gallery{
+        margin-top: 15px;
+        column-gap: 25px;
+        justify-content: center;
+    }
+    .gallery-item{
+        flex-basis: 40%;
+        margin-bottom: 20px;
+     }
+
+     .likes{
+        font-size: 13px;
+    }
+
+    .heart-icon{
+        width: 15px;
+        height: 15px;
+    }
+
+    .photographer-rating{
+        padding-inline: 6px;
+        position: fixed;
+        right: 10%;
+        width: 25%;
+    }
+
+    .photographer-rating p {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+   
+}
