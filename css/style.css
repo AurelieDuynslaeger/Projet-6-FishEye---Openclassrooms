@@ -20,8 +20,6 @@ header {
     
 }
 
-
-
 header h1 {
     color: #901C1C;
     margin-right: 100px;
@@ -79,8 +77,33 @@ header h1 {
 .photographer_section article a {
     text-decoration: none;
     text-align: center;
-
 }
 
+
+@media screen and (max-width:768px){
+    header{
+        flex-direction: column;
+        height: auto;
+    }
+    header h1 {
+        margin-right: 0;
+        
+    }
+    .logo {
+        height: 50px;
+        margin-left: 0;
+        margin: 1rem 0;
+    }
+    .photographer_section {
+        grid-template-columns: 1fr;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+    .photographer_section {
+        grid-template-columns: 1fr 1fr;
+    }
+}
 
 

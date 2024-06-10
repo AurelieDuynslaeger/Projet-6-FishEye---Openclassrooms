@@ -57,6 +57,12 @@ export function displayLightbox({ medias }) {
                 lightboxMedia.innerHTML = `<img src="assets/media/${selectedMedia.image}" alt="${selectedMedia.title}" role="img">`;
             } else if (selectedMedia.video) {
                 lightboxMedia.innerHTML = `<video controls><source src="assets/media/${selectedMedia.video}" type="video/mp4" role="video"></video>`;
+                const videoElement = lightboxMedia.querySelector('video');
+                videoElement.addEventListener('click', () => {
+                    videoElement.play();
+                });
+                // Ajouter l'attribut controls pour afficher les contrôles de la vidéo
+                videoElement.setAttribute('controls', '');
             }
             // Mettre à jour le titre de la lightbox avec le titre du média
             lightboxTitle.textContent = selectedMedia.title;

@@ -17,11 +17,13 @@ class VideoMedia extends Media {
         media.setAttribute('tabindex', '0');
         media.setAttribute('src', this.mediaLink);
         media.setAttribute('muted', '');
-        media.setAttribute('autoplay', '');
-        media.setAttribute('loop', '');
+        // media.setAttribute('autoplay', '');
+        // media.setAttribute('loop', '');
         return media;
     }
 }
 
 export default VideoMedia;
+
+
 
