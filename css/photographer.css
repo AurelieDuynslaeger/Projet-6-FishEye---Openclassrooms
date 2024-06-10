@@ -242,8 +242,8 @@ form input{
         height: 100px;
         width: 100px;
         position: absolute;
-        top: -1rem;
-        left: -1rem;
+        top: -2rem;
+        left: -2rem;
     }
     .photographer-info h1{
         font-size: 25px;
@@ -292,6 +292,20 @@ form input{
 
     .photographer-rating p {
         font-size: 12px;
+    }
+    #contact_modal{
+        padding: 20% 0;
+    }
+
+    .modal {
+        width: 80%;
+        padding: 12px;
+    }
+    .header_title{
+        font-size: 30px;
+    }
+    form label {
+        font-size: 15px;
     }
 }
 
