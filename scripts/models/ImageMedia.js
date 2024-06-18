@@ -12,7 +12,7 @@ class ImageMedia extends Media {
 
     get mediaContent() {
         const media = document.createElement('img');
-        media.setAttribute('alt', `picture named ${this._title}`);
+        media.setAttribute('alt', `photographie appelée ${this._title}`);
         media.setAttribute('data-media', this._id);
         media.setAttribute('tabindex', '0');
         media.setAttribute('src', this.mediaLink);

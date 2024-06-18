@@ -16,7 +16,7 @@ export function initializeTotalLikes(photographer, medias) {
     const likeIcon = document.createElement('img');
     likeIcon.classList.add('heart-icon');
     likeIcon.src = 'assets/icons/heart-total.svg';
-    likeIcon.alt = 'Likes';
+    likeIcon.alt = 'icones pour les Likes';
 
     const price = document.createElement('p');
     price.textContent = `${photographer.price} € / jour`;

@@ -28,7 +28,7 @@ export function bannerPhotographer(photographer) {
     //on display la photo de profile avec la src et le alt text pour le nom du photograph
     const picture = document.createElement('img');
     picture.setAttribute("src", `assets/photographers/${photographer.portrait}`);
-    picture.setAttribute('alt', photographer.name);
+    picture.setAttribute('alt', `photographie de ${photographer.name}`);
 
     // header.appendChild(identityInfo);
     header.appendChild(picture);

@@ -12,7 +12,7 @@ class VideoMedia extends Media {
 
     get mediaContent() {
         const media = document.createElement('video');
-        media.setAttribute('alt', `video named ${this._title}`);
+        media.setAttribute('alt', `vidéo dont le titre est ${this._title}`);
         media.setAttribute('data-media', this._id);
         media.setAttribute('tabindex', '0');
         media.setAttribute('src', this.mediaLink);

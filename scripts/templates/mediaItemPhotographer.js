@@ -27,7 +27,7 @@ export function mediaItemPhotographer(media, updateTotalLikes) {
     const likeIcon = document.createElement('img');
     likeIcon.classList.add('heart-icon');
     likeIcon.src = 'assets/icons/heart-item.svg';
-    likeIcon.alt = 'Likes';
+    likeIcon.alt = 'icones pour les Likes';
 
     const likesCount = document.createElement('span');
     likesCount.textContent = media.likes;

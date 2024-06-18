@@ -5,7 +5,7 @@ export function photographerTemplate(data) {
 
     const picture = `assets/photographers/${portrait}`;
     //texte qui sera display dans l'attribut alt de la balise a
-    const ariaLink = `link to ${name} photographer profile`;
+    const ariaLink = `lien vers le profil du photographe ${name} `;
     //lien qui nous emmène vers le profile du photographe où on véhicule l'id
     const link = `photographer.html?id=${id}`;
 
@@ -24,7 +24,7 @@ export function photographerTemplate(data) {
         profileLink.setAttribute("href", link);
         const img = document.createElement('img');
         img.setAttribute("src", picture);
-        img.setAttribute("alt", `${name} picture`);
+        img.setAttribute("alt", `photo de profil de ${name}`);
         const h2 = document.createElement('h2');
         h2.textContent = name;
 
