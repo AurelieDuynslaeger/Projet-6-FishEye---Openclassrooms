@@ -230,6 +230,7 @@ form input{
  }
 
 
+
  @media screen and (max-width:768px){
     .photograph-header {
         margin: 0 50px;
@@ -239,8 +240,8 @@ form input{
         gap: 2rem;
     }
     .photograph-header img{
-        height: 100px;
-        width: 100px;
+        height: 70px;
+        width: 70px;
         position: absolute;
         top: -2rem;
         left: -2rem;
@@ -270,7 +271,7 @@ form input{
         justify-content: center;
     }
     .gallery-item{
-        flex-basis: 40%;
+        flex-basis: 100%;
         margin-bottom: 20px;
      }
 
@@ -287,7 +288,7 @@ form input{
         padding-inline: 6px;
         position: fixed;
         right: 10%;
-        width: 25%;
+        width: 30%;
     }
 
     .photographer-rating p {
@@ -322,5 +323,8 @@ form input{
     }
     form label {
         font-size: 20px;
+    }
+    .photographer-rating{
+        width: 32%;
     }
 }
