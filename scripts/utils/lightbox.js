@@ -1,5 +1,4 @@
 export function displayLightbox({ medias }) {
-    // On cible les divers éléments du DOM pour la lightbox
     const lightbox = document.querySelector('.lightbox');
     const lightboxMedia = document.querySelector('.lightbox_media');
     const lightboxTitle = document.querySelector('.lightbox_title');
@@ -10,38 +9,27 @@ export function displayLightbox({ medias }) {
 
     let currentIndex = null;
 
-    // Fonction pour ouvrir la lightbox
     const openLightbox = (index) => {
         const main = document.getElementById('main');
         main.setAttribute('aria-hidden', 'true');
         lightbox.setAttribute('aria-hidden', 'false');
-        const body = document.body;
-        body.classList.add('no-scroll');
+        document.body.classList.add('no-scroll');
         lightbox.style.display = 'flex';
-        // On empêche le défilement de la page quand la lightbox est ouverte
-        // document.body.style.overflow = 'hidden';
-        // On met le focus sur le bouton de fermeture
         btnClose.focus();
         updateLightboxContent(index);
     };
 
-    // Fonction pour fermer la lightbox
     const closeLightbox = () => {
         const main = document.getElementById('main');
         main.setAttribute('aria-hidden', 'false');
         lightbox.setAttribute('aria-hidden', 'true');
-        // Au clic sur la X on passe la lightbox en display none
         lightbox.style.display = 'none';
-        const body = document.body;
-        body.classList.remove('no-scroll');
-        // On rétablit le défilement de la page
+        document.body.classList.remove('no-scroll');
     };
 
-    // Fonction pour mettre à jour le contenu de la lightbox
     const updateLightboxContent = (index) => {
         const selectedMedia = medias[index];
         if (selectedMedia) {
-            // Afficher le contenu du média dans la lightbox en fonction de son type (image ou vidéo)
             if (selectedMedia.image) {
                 lightboxMedia.innerHTML = `<img src="assets/media/${selectedMedia.image}" alt="${selectedMedia.title}" role="img">`;
             } else if (selectedMedia.video) {
@@ -50,31 +38,24 @@ export function displayLightbox({ medias }) {
                 videoElement.addEventListener('click', () => {
                     videoElement.play();
                 });
-                // Ajouter l'attribut controls pour afficher les contrôles de la vidéo
                 videoElement.setAttribute('controls', '');
             }
-            // Mettre à jour le titre de la lightbox avec le titre du média
             lightboxTitle.textContent = selectedMedia.title;
             currentIndex = index;
         }
     };
 
-    // Fonction pour passer au média suivant
     const nextMedia = () => {
         currentIndex = (currentIndex + 1) % medias.length;
         updateLightboxContent(currentIndex);
     };
 
-    // Fonction pour passer au média précédent
     const previousMedia = () => {
         currentIndex = (currentIndex - 1 + medias.length) % medias.length;
         updateLightboxContent(currentIndex);
     };
 
-    // On écoute le clic sur les items de gallery item
     mediaProvider.forEach((media) => {
-        media.setAttribute('role', 'button');
-        media.setAttribute('tabindex', '0');
         media.addEventListener('click', () => {
             const mediaId = media.getAttribute('data-media');
             currentIndex = medias.findIndex(m => m.id == mediaId);
@@ -82,7 +63,7 @@ export function displayLightbox({ medias }) {
         });
 
         media.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' || e.key === ' ') {
                 const mediaId = media.getAttribute('data-media');
                 currentIndex = medias.findIndex(m => m.id == mediaId);
                 openLightbox(currentIndex);
@@ -90,13 +71,11 @@ export function displayLightbox({ medias }) {
         });
     });
 
-    // On écoute les clics sur les boutons fermer, précédent, prochain
     btnPrevious.addEventListener('click', previousMedia);
     btnNext.addEventListener('click', nextMedia);
     btnClose.addEventListener('click', closeLightbox);
 
-    // Défilement du carousel avec le clavier
-    document.addEventListener('keyup', (e) => {
+    document.addEventListener('keydown', (e) => {
         switch (e.key) {
             case 'Escape':
                 closeLightbox();
