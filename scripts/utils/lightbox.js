@@ -1,4 +1,3 @@
-
 export function displayLightbox({ medias }) {
     // On cible les divers éléments du DOM pour la lightbox
     const lightbox = document.querySelector('.lightbox');
@@ -11,44 +10,34 @@ export function displayLightbox({ medias }) {
 
     let currentIndex = null;
 
-    // On écoute le clic sur les items de gallery item
-    mediaProvider.forEach((media) => {
-        // Ajout d'un écouteur d'événement au clik
-        media.addEventListener('click', () => {
-            const mediaId = media.getAttribute('data-media');
-            currentIndex = medias.findIndex(media => media.id == mediaId);
-            openLightbox(currentIndex);
-        });
-
-        // Ajout d'un écouteur d'événement pour le clavier
-        media.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const mediaId = media.getAttribute('data-media');
-                currentIndex = medias.findIndex(media => media.id == mediaId);
-                openLightbox(currentIndex);
-            }
-        });
-    });
-
-    // Ouverture de la lightbox
+    // Fonction pour ouvrir la lightbox
     const openLightbox = (index) => {
+        const main = document.getElementById('main');
+        main.setAttribute('aria-hidden', 'true');
+        lightbox.setAttribute('aria-hidden', 'false');
+        const body = document.body;
+        body.classList.add('no-scroll');
         lightbox.style.display = 'flex';
         // On empêche le défilement de la page quand la lightbox est ouverte
-        document.body.style.overflow = 'hidden';
+        // document.body.style.overflow = 'hidden';
         // On met le focus sur le bouton de fermeture
         btnClose.focus();
         updateLightboxContent(index);
     };
 
-    // Fermeture de la lightbox
+    // Fonction pour fermer la lightbox
     const closeLightbox = () => {
+        const main = document.getElementById('main');
+        main.setAttribute('aria-hidden', 'false');
+        lightbox.setAttribute('aria-hidden', 'true');
         // Au clic sur la X on passe la lightbox en display none
         lightbox.style.display = 'none';
+        const body = document.body;
+        body.classList.remove('no-scroll');
         // On rétablit le défilement de la page
-        document.body.style.overflow = '';
     };
 
-    // Mise à jour du contenu de la lightbox
+    // Fonction pour mettre à jour le contenu de la lightbox
     const updateLightboxContent = (index) => {
         const selectedMedia = medias[index];
         if (selectedMedia) {
@@ -70,17 +59,36 @@ export function displayLightbox({ medias }) {
         }
     };
 
-    // Passer au média suivant
+    // Fonction pour passer au média suivant
     const nextMedia = () => {
         currentIndex = (currentIndex + 1) % medias.length;
         updateLightboxContent(currentIndex);
     };
 
-    // Passer au média précédent
+    // Fonction pour passer au média précédent
     const previousMedia = () => {
         currentIndex = (currentIndex - 1 + medias.length) % medias.length;
         updateLightboxContent(currentIndex);
     };
+
+    // On écoute le clic sur les items de gallery item
+    mediaProvider.forEach((media) => {
+        media.setAttribute('role', 'button');
+        media.setAttribute('tabindex', '0');
+        media.addEventListener('click', () => {
+            const mediaId = media.getAttribute('data-media');
+            currentIndex = medias.findIndex(m => m.id == mediaId);
+            openLightbox(currentIndex);
+        });
+
+        media.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const mediaId = media.getAttribute('data-media');
+                currentIndex = medias.findIndex(m => m.id == mediaId);
+                openLightbox(currentIndex);
+            }
+        });
+    });
 
     // On écoute les clics sur les boutons fermer, précédent, prochain
     btnPrevious.addEventListener('click', previousMedia);
@@ -88,7 +96,6 @@ export function displayLightbox({ medias }) {
     btnClose.addEventListener('click', closeLightbox);
 
     // Défilement du carousel avec le clavier
-    // On écoute les keyup sur Escape pour fermer, flèche gauche pour précédent média, et flèche droite pour prochain média
     document.addEventListener('keyup', (e) => {
         switch (e.key) {
             case 'Escape':
