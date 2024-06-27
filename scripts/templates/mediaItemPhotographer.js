@@ -28,6 +28,7 @@ export function mediaItemPhotographer(media, updateTotalLikes) {
     likeIcon.classList.add('heart-icon');
     likeIcon.src = 'assets/icons/heart-item.svg';
     likeIcon.alt = 'icones pour les Likes';
+    likeIcon.setAttribute('tabindex', '0'); //like au clavier
 
     const likesCount = document.createElement('span');
     likesCount.textContent = media.likes;
@@ -36,12 +37,22 @@ export function mediaItemPhotographer(media, updateTotalLikes) {
 
     let likedMediaIds = [];
 
-    likeIcon.addEventListener('click', () => {
+    const likeMedia = () => {
         if (!likedMediaIds.includes(media.id)) {
             media.likes++;
             likesCount.textContent = media.likes;
             likedMediaIds.push(media.id);
             updateTotalLikes();
+        }
+    };
+
+    likeIcon.addEventListener('click', likeMedia);
+
+    //like au clavier
+    likeIcon.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            likeMedia();
         }
     });
 
