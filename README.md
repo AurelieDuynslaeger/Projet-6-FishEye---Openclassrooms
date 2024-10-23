@@ -46,6 +46,9 @@ L'accessibilité était une priorité absolue dans ce projet.
 * Factory Method
 * JavaScript Vanilla
 
+## Démo
+[ici!](https://fisheeye.netlify.app)
+
 
 ## Installation
 
